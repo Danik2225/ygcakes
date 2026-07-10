@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>YG Cakes | Админ-панель</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="admin.js" defer></script>
+
+</head>
+
+<body>
+
+<h1 align="center">👨‍💼 Админ-панель</h1>
+
+<hr>
+
+<h2>➕ Добавить торт</h2>
+
+<input
+id="cakeName"
+type="text"
+placeholder="Название торта">
+
+<br><br>
+
+<input
+id="cakePrice"
+type="number"
+placeholder="Цена">
+
+<br><br>
+
+<label><b>Фото торта</b></label>
+
+<br><br>
+
+<input
+id="cakeImage"
+type="file"
+accept="image/*">
+
+<br><br>
+
+<button onclick="addCake()">
+➕ Добавить торт
+</button>
+
+<hr>
+
+<h2>🎂 Все торты</h2>
+
+<div id="cakes">
+
+<h3 align="center">
+Пока нет тортов
+</h3>
+
+</div>
+
+<hr>
+
+<h2>📦 Заказы</h2>
+
+<div id="orders">
+
+<h3 align="center">
+📦 Заказов нет
+</h3>
+
+</div>
+
+<hr>
+
+<h2>📧 Почта для получения заказов</h2>
+
+<input
+id="email"
+type="email"
+placeholder="Введите почту">
+
+<button onclick="saveEmail()">
+💾 Сохранить
+</button>
+
+</body>
+
+</html>

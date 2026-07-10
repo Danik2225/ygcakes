@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YG Cakes</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+<header>
+    <h1>🎂 YG Cakes</h1>
+
+    <nav>
+        <a href="#home">Главная</a>
+        <a href="#cakes">Торты</a>
+        <a href="#cart">Корзина</a>
+        <a href="#contact">Контакты</a>
+    </nav>
+</header>
+
+<section class="hero" id="home">
+    <h2>Добро пожаловать в YG Cakes</h2>
+    <p>Торты на заказ • Свадебные • Детские • Бенто</p>
+
+    <button onclick="document.getElementById('cakes').scrollIntoView({behavior:'smooth'})">
+        Смотреть каталог
+    </button>
+</section>
+
+<section id="cakes">
+
+    <div class="cake">
+        <img src="images/cake1.jpg" alt="Торт">
+        <h3>Клубничный торт</h3>
+        <p>12000 ֏</p>
+        <button onclick="addToCart('Клубничный торт',12000)">
+            Добавить
+        </button>
+    </div>
+
+    <div class="cake">
+        <img src="images/cake2.jpg" alt="Торт">
+        <h3>Шоколадный торт</h3>
+        <p>15000 ֏</p>
+        <button onclick="addToCart('Шоколадный торт',15000)">
+            Добавить
+        </button>
+    </div>
+
+    <div class="cake">
+        <img src="images/cake3.jpg" alt="Торт">
+        <h3>Свадебный торт</h3>
+        <p>45000 ֏</p>
+        <button onclick="addToCart('Свадебный торт',45000)">
+            Добавить
+        </button>
+    </div>
+
+</section>
+
+<section id="cart">
+
+    <h2>🛒 Корзина</h2>
+
+    <div id="cartItems"></div>
+
+    <h3>Итого:
+        <span id="total">0</span> ֏
+    </h3>
+
+    <input id="promo" placeholder="Промокод">
+
+    <button onclick="promo()">
+        Применить
+    </button>
+
+    <br><br>
+
+    <input id="name" placeholder="Ваше имя">
+
+    <input id="phone" placeholder="Телефон">
+
+    <input id="address" placeholder="Адрес доставки">
+
+    <input type="date">
+
+    <textarea placeholder="Комментарий"></textarea>
+
+    <h3>Способ оплаты</h3>
+
+    <select>
+        <option>Visa</option>
+        <option>MasterCard</option>
+        <option>Idram</option>
+        <option>Telcell</option>
+        <option>Оплата при получении</option>
+    </select>
+
+    <br><br>
+
+    <button class="pay" onclick="checkout()">
+        💳 Оплатить
+    </button>
+
+</section>
+
+<footer id="contact">
+
+    <h2>Контакты</h2>
+
+    <p>📞 098 434363</p>
+
+    <p>Instagram: @yana_gulyan</p>
+
+    <p>TikTok: @yg_cakes</p>
+
+    <p>Email: yanagulyanyg@gmail.com</p>
+
+</footer>
+
+</body>
+</html>
