@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>YG Cakes</title>
+<title>YG Cakes — Торты на заказ</title>
+
+<!-- Иконка сайта -->
+<link rel="icon" type="image/png" href="images/icon.png">
+
+<!-- Для Google поиска -->
+<meta name="description" content="YG Cakes — торты на заказ. Свадебные, детские, бенто и праздничные торты.">
+
+<meta name="keywords" content="YG Cakes, ygcakes, торты, торты на заказ, свадебные торты, бенто">
+
+<meta name="author" content="YG Cakes">
 
 <link rel="stylesheet" href="style.css">
+
 <script src="script.js" defer></script>
 
 </head>
@@ -18,22 +31,34 @@
 <h1>🎂 YG Cakes</h1>
 
 <nav>
+
 <a href="#home">Главная</a>
+
 <a href="#cakes">Торты</a>
+
 <a href="#cart">Корзина</a>
+
 <a href="#contact">Контакты</a>
+
 </nav>
 
 </header>
+
 <div class="search-box">
 
 <input
+
 type="text"
+
 id="search"
+
 placeholder="🔍 Поиск торта..."
+
 onkeyup="searchCakes()">
 
 </div>
+
+<p id="notFound">Ничего не найдено</p>
 
 <section class="hero" id="home">
 
@@ -44,7 +69,9 @@ onkeyup="searchCakes()">
 </p>
 
 <button onclick="document.getElementById('cakes').scrollIntoView({behavior:'smooth'})">
+
 Смотреть каталог
+
 </button>
 
 </section>
@@ -52,157 +79,243 @@ onkeyup="searchCakes()">
 <section id="cakes">
 
 <div class="cake">
+
 <img src="images/cake1.jpg">
+
 <h3>🍓 Клубничный торт</h3>
+
 <p>12000 ֏</p>
+
 <button onclick="addToCart('Клубничный торт',12000)">
 Добавить
 </button>
+
 </div>
 
 <div class="cake">
+
 <img src="images/cake2.jpg">
+
 <h3>🍫 Шоколадный торт</h3>
+
 <p>15000 ֏</p>
+
 <button onclick="addToCart('Шоколадный торт',15000)">
 Добавить
 </button>
+
 </div>
 
 <div class="cake">
+
 <img src="images/cake3.jpg">
+
 <h3>💍 Свадебный торт</h3>
+
 <p>45000 ֏</p>
+
 <button onclick="addToCart('Свадебный торт',45000)">
 Добавить
 </button>
+
 </div>
 
 <div class="cake">
+
 <img src="images/cake4.jpg">
+
 <h3>Торт fifa</h3>
+
 <p>13000 ֏</p>
+
 <button onclick="addToCart('Торт fifa',13000)">
 Добавить
 </button>
+
 </div>
 
 <div class="cake">
+
 <img src="images/cake5.jpg">
+
 <h3>Малиновый торт</h3>
+
 <p>14000 ֏</p>
+
 <button onclick="addToCart('Малиновый торт',14000)">
 Добавить
 </button>
+
 </div>
 
 <div class="cake">
+
 <img src="images/cake6.jpg">
+
 <h3>Дизайнерский торт</h3>
+
 <p>16000 ֏</p>
+
 <button onclick="addToCart('Дизайнерский торт',16000)">
 Добавить
 </button>
+
 </div>
 
 <div class="cake">
+
 <img src="images/cake7.jpg">
+
 <h3>Желейный торт</h3>
+
 <p>12000 ֏</p>
+
 <button onclick="addToCart('Желейный торт',12000)">
 Добавить
 </button>
+
 </div>
 
 <div class="cake">
+
 <img src="images/cake8.jpg">
+
 <h3>Торт изделия</h3>
+
 <p>15000 ֏</p>
+
 <button onclick="addToCart('Торт изделия',15000)">
 Добавить
 </button>
+
 </div>
 
 <div class="cake">
+
 <img src="images/cake11.jpg">
+
 <h3>Медовик</h3>
+
 <p>1000 ֏</p>
+
 <button onclick="addToCart('Медовик',1000)">
 Добавить
 </button>
+
 </div>
 
 <div class="cake">
+
 <img src="images/cake0.jpg">
+
 <h3>Кофейный торт</h3>
+
 <p>20000 ֏</p>
+
 <button onclick="addToCart('Кофейный торт',20000)">
 Добавить
 </button>
+
 </div>
 
 <div class="cake">
+
 <img src="images/cake12.jpg">
+
 <h3>🎂 Детский торт</h3>
+
 <p>20000 ֏</p>
+
 <button onclick="addToCart('Детский торт',20000)">
 Добавить
 </button>
+
 </div>
 
 <div class="cake">
+
 <img src="images/cake14.jpg">
+
 <h3>Торт бургер</h3>
+
 <p>19000 ֏</p>
+
 <button onclick="addToCart('Торт бургер',19000)">
 Добавить
 </button>
+
 </div>
 
 <div class="cake">
+
 <img src="images/cake15.jpg">
+
 <h3>❤️ девячий Торт</h3>
+
 <p>17000 ֏</p>
+
 <button onclick="addToCart('девячий Торт',17000)">
 Добавить
 </button>
+
 </div>
 
 <div class="cake">
+
 <img src="images/cake17.jpg">
+
 <h3>🥭 Фруктовый торт</h3>
+
 <p>21000 ֏</p>
+
 <button onclick="addToCart('Фруктовый торт',21000)">
 Добавить
 </button>
+
 </div>
 
 <div class="cake">
+
 <img src="images/cake18.jpg">
+
 <h3>🧁 Бенто-торт</h3>
+
 <p>16000 ֏</p>
+
 <button onclick="addToCart('Бенто-торт',16000)">
 Добавить
 </button>
+
 </div>
 
 <div class="cake">
+
 <img src="images/cake19.jpg">
+
 <h3>🎉 Праздничный торт</h3>
+
 <p>25000 ֏</p>
+
 <button onclick="addToCart('Праздничный торт',25000)">
 Добавить
 </button>
+
 </div>
 
 <div class="cake">
+
 <img src="images/cake20.jpg">
+
 <h3>Vip торт</h3>
+
 <p>50000 ֏</p>
+
 <button onclick="addToCart('Vip торт',50000)">
 Добавить
 </button>
+
 </div>
+
 </section>
 
 <section id="cart">
@@ -212,8 +325,11 @@ onkeyup="searchCakes()">
 <div id="cartItems"></div>
 
 <h3>
+
 Итого:
+
 <span id="total">0</span> ֏
+
 </h3>
 
 <input id="name" placeholder="Ваше имя">
@@ -231,8 +347,11 @@ onkeyup="searchCakes()">
 <select id="payment">
 
 <option>Visa</option>
+
 <option>MasterCard</option>
+
 <option>Idram</option>
+
 <option>Оплата при получении</option>
 
 </select>
@@ -262,4 +381,5 @@ onkeyup="searchCakes()">
 </footer>
 
 </body>
+
 </html>
