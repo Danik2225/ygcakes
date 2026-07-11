@@ -282,27 +282,27 @@ function checkout(){
 // Страница товара
 // =======================
 
-function openProduct(name,price,image){
+function openProduct(name, price, image) {
 
-    localStorage.setItem("productName",name);
-    localStorage.setItem("productPrice",price);
-    localStorage.setItem("productImage",image);
+    localStorage.setItem("productName", name);
+    localStorage.setItem("productPrice", price);
+    localStorage.setItem("productImage", image);
 
-    window.location.href="product.html";
+    window.location.href = "product.html";
 
 }
 
-function loadProduct(){
+function loadProduct() {
 
-    const block=document.getElementById("product");
+    const block = document.getElementById("product");
 
-    if(!block) return;
+    if (!block) return;
 
-    const name=localStorage.getItem("productName");
-    const price=localStorage.getItem("productPrice");
-    const image=localStorage.getItem("productImage");
+    const name = localStorage.getItem("productName");
+    const price = localStorage.getItem("productPrice");
+    const image = localStorage.getItem("productImage");
 
-    block.innerHTML=`
+    block.innerHTML = `
 
     <img src="${image}" class="product-image">
 
@@ -315,7 +315,7 @@ function loadProduct(){
     Изготавливается на заказ из качественных ингредиентов.
     </p>
 
-    <button onclick="addToCart('${name}',${price})">
+    <button onclick="addToCart('${name}', ${price})">
     🛒 Добавить в корзину
     </button>
 
@@ -329,15 +329,14 @@ function loadProduct(){
 
 }
 
-
 // =======================
 // Загрузка сайта
 // =======================
 
-window.onload=function(){
+window.onload = function () {
 
     updateCart();
 
     loadProduct();
 
-}
+};
