@@ -1,123 +1,291 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YG Cakes</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+<title>YG Cakes</title>
+
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+
 </head>
+
 <body>
 
 <header>
-    <h1>🎂 YG Cakes</h1>
 
-    <nav>
-        <a href="#home">Главная</a>
-        <a href="#cakes">Торты</a>
-        <a href="#cart">Корзина</a>
-        <a href="#contact">Контакты</a>
-    </nav>
+<h1>🎂 YG Cakes</h1>
+
+<nav>
+<a href="#home">Главная</a>
+<a href="#cakes">Торты</a>
+<a href="#cart">Корзина</a>
+<a href="#contact">Контакты</a>
+</nav>
+
 </header>
 
 <section class="hero" id="home">
-    <h2>Добро пожаловать в YG Cakes</h2>
-    <p>Торты на заказ • Свадебные • Детские • Бенто</p>
 
-    <button onclick="document.getElementById('cakes').scrollIntoView({behavior:'smooth'})">
-        Смотреть каталог
-    </button>
+<h2>Добро пожаловать в YG Cakes</h2>
+
+<p>
+Торты на заказ • Свадебные • Детские • Бенто
+</p>
+
+<button onclick="document.getElementById('cakes').scrollIntoView({behavior:'smooth'})">
+Смотреть каталог
+</button>
+
 </section>
 
 <section id="cakes">
 
-    <div class="cake">
-        <img src="images/cake1.jpg" alt="Торт">
-        <h3>Клубничный торт</h3>
-        <p>12000 ֏</p>
-        <button onclick="addToCart('Клубничный торт',12000)">
-            Добавить
-        </button>
-    </div>
+<div class="cake">
+<img src="images/cake1.jpg">
+<h3>🍓 Клубничный торт</h3>
+<p>12000 ֏</p>
+<button onclick="addToCart('Клубничный торт',12000)">
+Добавить
+</button>
+</div>
 
-    <div class="cake">
-        <img src="images/cake2.jpg" alt="Торт">
-        <h3>Шоколадный торт</h3>
-        <p>15000 ֏</p>
-        <button onclick="addToCart('Шоколадный торт',15000)">
-            Добавить
-        </button>
-    </div>
+<div class="cake">
+<img src="images/cake2.jpg">
+<h3>🍫 Шоколадный торт</h3>
+<p>15000 ֏</p>
+<button onclick="addToCart('Шоколадный торт',15000)">
+Добавить
+</button>
+</div>
 
-    <div class="cake">
-        <img src="images/cake3.jpg" alt="Торт">
-        <h3>Свадебный торт</h3>
-        <p>45000 ֏</p>
-        <button onclick="addToCart('Свадебный торт',45000)">
-            Добавить
-        </button>
-    </div>
+<div class="cake">
+<img src="images/cake3.jpg">
+<h3>💍 Свадебный торт</h3>
+<p>45000 ֏</p>
+<button onclick="addToCart('Свадебный торт',45000)">
+Добавить
+</button>
+</div>
+
+<div class="cake">
+<img src="images/cake4.jpg">
+<h3>🍰 Ванильный торт</h3>
+<p>13000 ֏</p>
+<button onclick="addToCart('Ванильный торт',13000)">
+Добавить
+</button>
+</div>
+
+<div class="cake">
+<img src="images/cake5.jpg">
+<h3>🍒 Вишнёвый торт</h3>
+<p>14000 ֏</p>
+<button onclick="addToCart('Вишнёвый торт',14000)">
+Добавить
+</button>
+</div>
+
+<div class="cake">
+<img src="images/cake6.jpg">
+<h3>🥜 Ореховый торт</h3>
+<p>16000 ֏</p>
+<button onclick="addToCart('Ореховый торт',16000)">
+Добавить
+</button>
+</div>
+
+<div class="cake">
+<img src="images/cake7.jpg">
+<h3>🍯 Медовый торт</h3>
+<p>12000 ֏</p>
+<button onclick="addToCart('Медовый торт',12000)">
+Добавить
+</button>
+</div>
+
+<div class="cake">
+<img src="images/cake8.jpg">
+<h3>🥥 Кокосовый торт</h3>
+<p>15000 ֏</p>
+<button onclick="addToCart('Кокосовый торт',15000)">
+Добавить
+</button>
+</div>
+
+<div class="cake">
+<img src="images/cake9.jpg">
+<h3>🍪 Орео торт</h3>
+<p>17000 ֏</p>
+<button onclick="addToCart('Орео торт',17000)">
+Добавить
+</button>
+</div>
+
+<div class="cake">
+<img src="images/cake10.jpg">
+<h3>☕ Тирамису</h3>
+<p>18000 ֏</p>
+<button onclick="addToCart('Тирамису',18000)">
+Добавить
+</button>
+</div>
+
+<div class="cake">
+<img src="images/cake11.jpg">
+<h3>🧁 Бенто-торт</h3>
+<p>8000 ֏</p>
+<button onclick="addToCart('Бенто-торт',8000)">
+Добавить
+</button>
+</div>
+
+<div class="cake">
+<img src="images/cake12.jpg">
+<h3>🎂 Детский торт</h3>
+<p>20000 ֏</p>
+<button onclick="addToCart('Детский торт',20000)">
+Добавить
+</button>
+</div>
+
+<div class="cake">
+<img src="images/cake13.jpg">
+<h3>🌈 Радужный торт</h3>
+<p>22000 ֏</p>
+<button onclick="addToCart('Радужный торт',22000)">
+Добавить
+</button>
+</div>
+
+<div class="cake">
+<img src="images/cake14.jpg">
+<h3>🍫 Три шоколада</h3>
+<p>19000 ֏</p>
+<button onclick="addToCart('Три шоколада',19000)">
+Добавить
+</button>
+</div>
+
+<div class="cake">
+<img src="images/cake15.jpg">
+<h3>❤️ Красный бархат</h3>
+<p>17000 ֏</p>
+<button onclick="addToCart('Красный бархат',17000)">
+Добавить
+</button>
+</div>
+
+<div class="cake">
+<img src="images/cake16.jpg">
+<h3>🍋 Лимонный торт</h3>
+<p>14000 ֏</p>
+<button onclick="addToCart('Лимонный торт',14000)">
+Добавить
+</button>
+</div>
+
+<div class="cake">
+<img src="images/cake17.jpg">
+<h3>🥭 Фруктовый торт</h3>
+<p>21000 ֏</p>
+<button onclick="addToCart('Фруктовый торт',21000)">
+Добавить
+</button>
+</div>
+
+<div class="cake">
+<img src="images/cake18.jpg">
+<h3>☕ Кофейный торт</h3>
+<p>16000 ֏</p>
+<button onclick="addToCart('Кофейный торт',16000)">
+Добавить
+</button>
+</div>
+
+<div class="cake">
+<img src="images/cake19.jpg">
+<h3>🎉 Праздничный торт</h3>
+<p>25000 ֏</p>
+<button onclick="addToCart('Праздничный торт',25000)">
+Добавить
+</button>
+</div>
+
+<div class="cake">
+<img src="images/cake20.jpg">
+<h3>👑 YG Premium Cake</h3>
+<p>50000 ֏</p>
+<button onclick="addToCart('YG Premium Cake',50000)">
+Добавить
+</button>
+</div>
 
 </section>
 
 <section id="cart">
 
-    <h2>🛒 Корзина</h2>
+<h2>🛒 Корзина</h2>
 
-    <div id="cartItems"></div>
+<div id="cartItems"></div>
 
-    <h3>Итого:
-        <span id="total">0</span> ֏
-    </h3>
+<h3>
+Итого:
+<span id="total">0</span> ֏
+</h3>
 
-    <input id="promo" placeholder="Промокод">
+<input id="promo" placeholder="Промокод">
 
-    <button onclick="promo()">
-        Применить
-    </button>
+<button onclick="promo()">
+Применить
+</button>
 
-    <br><br>
+<br><br>
 
-    <input id="name" placeholder="Ваше имя">
+<input id="name" placeholder="Ваше имя">
 
-    <input id="phone" placeholder="Телефон">
+<input id="phone" placeholder="Телефон">
 
-    <input id="address" placeholder="Адрес доставки">
+<input id="address" placeholder="Адрес доставки">
 
-    <input type="date">
+<input type="date">
 
-    <textarea placeholder="Комментарий"></textarea>
+<textarea placeholder="Комментарий"></textarea>
 
-    <h3>Способ оплаты</h3>
+<h3>Способ оплаты</h3>
 
-    <select>
-        <option>Visa</option>
-        <option>MasterCard</option>
-        <option>Idram</option>
-        <option>Telcell</option>
-        <option>Оплата при получении</option>
-    </select>
+<select id="payment">
 
-    <br><br>
+<option>Visa</option>
+<option>MasterCard</option>
+<option>Idram</option>
+<option>Telcell</option>
+<option>Оплата при получении</option>
 
-    <button class="pay" onclick="checkout()">
-        💳 Оплатить
-    </button>
+</select>
+
+<br><br>
+
+<button class="pay" onclick="checkout()">
+
+💳 Оплатить
+
+</button>
 
 </section>
 
 <footer id="contact">
 
-    <h2>Контакты</h2>
+<h2>Контакты</h2>
 
-    <p>📞 098 434363</p>
+<p>📞 098 434363</p>
 
-    <p>Instagram: @yana_gulyan</p>
+<p>Instagram: @yana_gulyan</p>
 
-    <p>TikTok: @yg_cakes</p>
+<p>TikTok: @yg_cakes</p>
 
-    <p>Email: yanagulyanyg@gmail.com</p>
+<p>Email: yanagulyanyg@gmail.com</p>
 
 </footer>
 
