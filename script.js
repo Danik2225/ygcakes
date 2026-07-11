@@ -145,10 +145,16 @@ function removeItem(index){
 // =======================
 // Промокод
 // =======================
+let promoUsed = false;
 
 function promo(){
 
-    const code = document.getElementById("promo").value;
+    if(promoUsed){
+        alert("❌ Промокод уже использован.");
+        return;
+    }
+
+    const code = document.getElementById("promo").value.trim();
 
     if(code === "SALE10"){
 
@@ -156,16 +162,17 @@ function promo(){
 
         document.getElementById("total").innerText = total;
 
-        alert("✅ Промокод применён!");
+        promoUsed = true;
+
+        alert("✅ Скидка 10% применена!");
 
     }else{
 
-        alert("❌ Промокод неверный.");
+        alert("❌ Неверный промокод.");
 
     }
 
 }
-
 
 // =======================
 // Поиск
