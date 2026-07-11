@@ -176,24 +176,34 @@ function searchCakes(){
     const text = document
         .getElementById("search")
         .value
-        .toLowerCase();
+        .toLowerCase()
+        .trim();
 
-    const cakes =
-        document.querySelectorAll(".cake");
+    const cakes = document.querySelectorAll(".cake");
+    const notFound = document.getElementById("notFound");
 
-    cakes.forEach(cake=>{
+    let found = false;
 
-        if(cake.innerText.toLowerCase().includes(text)){
+    cakes.forEach(cake => {
 
-            cake.style.display="";
+        if (cake.innerText.toLowerCase().includes(text)) {
 
-        }else{
+            cake.style.display = "";
+            found = true;
 
-            cake.style.display="none";
+        } else {
+
+            cake.style.display = "none";
 
         }
 
     });
+
+    if(found){
+        notFound.style.display = "none";
+    }else{
+        notFound.style.display = "block";
+    }
 
 }
 // =======================
