@@ -1,36 +1,52 @@
 let cart = [];
 let total = 0;
 
+// =======================
+// Загрузка корзины
+// =======================
 
-// Загружаем корзину после открытия сайта
 const savedCart = localStorage.getItem("cart");
 
 if (savedCart) {
     cart = JSON.parse(savedCart);
 }
 
+// =======================
+// Сохранение корзины
+// =======================
 
-// Сохраняем корзину
 function saveCart() {
     localStorage.setItem("cart", JSON.stringify(cart));
 }
 
+// =======================
+// Добавление в корзину
+// =======================
 
-// Добавить в корзину
 function addToCart(name, price) {
 
-    cart.push({
-        name: name,
-        price: price
-    });
+    const item = cart.find(cake => cake.name === name);
+
+    if (item) {
+        item.count = (item.count || 1) + 1;
+    } else {
+        cart.push({
+            name: name,
+            price: Number(price),
+            count: 1
+        });
+    }
 
     saveCart();
 
     updateCart();
+
 }
 
-
+// =======================
 // Обновление корзины
+// =======================
+
 function updateCart() {
 
     const cartItems = document.getElementById("cartItems");
@@ -42,11 +58,11 @@ function updateCart() {
 
     total = 0;
 
-
     cart.forEach((item, index) => {
 
-        total += Number(item.price);
+        const sum = item.price * item.count;
 
+        total += sum;
 
         cartItems.innerHTML += `
 
@@ -54,12 +70,15 @@ function updateCart() {
 
             <h3>${item.name}</h3>
 
-            <p>${item.price} ֏</p>
+            <p>${item.price} ֏ × ${item.count}</p>
 
+            <p><b>${sum} ֏</b></p>
 
-            <button onclick="removeItem(${index})">
-                ❌ Удалить
-            </button>
+            <button onclick="minusItem(${index})">➖</button>
+
+            <button onclick="plusItem(${index})">➕</button>
+
+            <button onclick="removeItem(${index})">❌ Удалить</button>
 
         </div>
 
@@ -69,16 +88,16 @@ function updateCart() {
 
     });
 
-
     totalText.innerText = total;
 
 }
+// =======================
+// Увеличить количество
+// =======================
 
+function plusItem(index){
 
-// Удалить товар
-function removeItem(index) {
-
-    cart.splice(index, 1);
+    cart[index].count++;
 
     saveCart();
 
@@ -87,38 +106,103 @@ function removeItem(index) {
 }
 
 
-// Промокод
-function promo() {
+// =======================
+// Уменьшить количество
+// =======================
 
-    const code = document.getElementById("promo").value;
+function minusItem(index){
 
+    cart[index].count--;
 
-    if (code === "SALE10") {
+    if(cart[index].count <= 0){
 
-        total = total * 0.9;
-
-        document.getElementById("total").innerText =
-            Math.round(total);
-
-
-        alert("Промокод применён!");
+        cart.splice(index,1);
 
     }
 
-    else {
+    saveCart();
 
-        alert("Промокод неверный.");
+    updateCart();
+
+}
+
+
+// =======================
+// Удалить товар
+// =======================
+
+function removeItem(index){
+
+    cart.splice(index,1);
+
+    saveCart();
+
+    updateCart();
+
+}
+
+
+// =======================
+// Промокод
+// =======================
+
+function promo(){
+
+    const code = document.getElementById("promo").value;
+
+    if(code === "SALE10"){
+
+        total = Math.round(total * 0.9);
+
+        document.getElementById("total").innerText = total;
+
+        alert("✅ Промокод применён!");
+
+    }else{
+
+        alert("❌ Промокод неверный.");
 
     }
 
 }
 
 
+// =======================
+// Поиск
+// =======================
+
+function searchCakes(){
+
+    const text = document
+        .getElementById("search")
+        .value
+        .toLowerCase();
+
+    const cakes =
+        document.querySelectorAll(".cake");
+
+    cakes.forEach(cake=>{
+
+        if(cake.innerText.toLowerCase().includes(text)){
+
+            cake.style.display="";
+
+        }else{
+
+            cake.style.display="none";
+
+        }
+
+    });
+
+}
+// =======================
 // Оформление заказа
-function checkout() {
+// =======================
 
+function checkout(){
 
-    if (cart.length === 0) {
+    if(cart.length === 0){
 
         alert("Корзина пустая.");
 
@@ -126,21 +210,16 @@ function checkout() {
 
     }
 
-
     const name =
         document.getElementById("name").value;
-
 
     const phone =
         document.getElementById("phone").value;
 
-
     const address =
         document.getElementById("address").value;
 
-
-
-    if(name === "" || phone === "" || address === "") {
+    if(name === "" || phone === "" || address === ""){
 
         alert("Заполните все поля.");
 
@@ -148,27 +227,18 @@ function checkout() {
 
     }
 
-
-
     const order = {
 
         name:name,
-
         phone:phone,
-
         address:address,
-
         items:cart,
-
-        total:total
+        total:total,
+        date:new Date().toLocaleString()
 
     };
 
-
-
-    console.log("Новый заказ:", order);
-
-
+    console.log(order);
 
     alert(
 `Спасибо за заказ!
@@ -182,10 +252,6 @@ function checkout() {
 Сумма: ${total} ֏`
     );
 
-
-
-    // очищаем корзину после заказа
-
     cart = [];
 
     saveCart();
@@ -195,6 +261,66 @@ function checkout() {
 }
 
 
+// =======================
+// Страница товара
+// =======================
 
-// Загружаем корзину при старте
-updateCart();
+function openProduct(name,price,image){
+
+    localStorage.setItem("productName",name);
+    localStorage.setItem("productPrice",price);
+    localStorage.setItem("productImage",image);
+
+    window.location.href="product.html";
+
+}
+
+function loadProduct(){
+
+    const block=document.getElementById("product");
+
+    if(!block) return;
+
+    const name=localStorage.getItem("productName");
+    const price=localStorage.getItem("productPrice");
+    const image=localStorage.getItem("productImage");
+
+    block.innerHTML=`
+
+    <img src="${image}" class="product-image">
+
+    <h1>${name}</h1>
+
+    <h2>${price} ֏</h2>
+
+    <p>
+    Свежий домашний торт от YG Cakes.
+    Изготавливается на заказ из качественных ингредиентов.
+    </p>
+
+    <button onclick="addToCart('${name}',${price})">
+    🛒 Добавить в корзину
+    </button>
+
+    <br><br>
+
+    <button onclick="history.back()">
+    ← Назад
+    </button>
+
+    `;
+
+}
+
+
+// =======================
+// Загрузка сайта
+// =======================
+
+window.onload=function(){
+
+    updateCart();
+
+    loadProduct();
+
+}
