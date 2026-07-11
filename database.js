@@ -12,9 +12,9 @@ db.serialize(() => {
     db.run(`
         CREATE TABLE IF NOT EXISTS cakes (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT,
-            price INTEGER,
-            image TEXT
+            name TEXT NOT NULL,
+            price INTEGER NOT NULL,
+            image TEXT NOT NULL
         )
     `);
 
@@ -26,7 +26,7 @@ db.serialize(() => {
             address TEXT,
             email TEXT,
             total INTEGER,
-            status TEXT
+            status TEXT DEFAULT 'Новый'
         )
     `);
 });
