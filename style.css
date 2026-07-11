@@ -8,142 +8,460 @@
 body{
     background:#fff8f5;
     color:#333;
+    position:relative;
 }
 
-header{
-    background:#ff8fab;
-    color:white;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px 40px;
-    position:sticky;
+/* Цветочная гирлянда сверху */
+
+body::before{
+
+    content:"";
+
+    position:absolute;
+
     top:0;
+    left:0;
+
+    width:100%;
+    height:120px;
+
+    background:url("images/flowers-top.png") center/cover no-repeat;
+
+    z-index:1000;
+
+    pointer-events:none;
+
+}
+
+/* Основная шапка */
+
+header{
+
+    background:#ff8fab;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:20px 40px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:998;
+
 }
 
 header h1{
+
     font-size:32px;
+
 }
 
 nav a{
+
     color:white;
+
     text-decoration:none;
+
     margin-left:20px;
+
     font-weight:bold;
+
 }
 
+nav a:hover{
+
+    color:#ffe066;
+
+}
+
+/* Главный экран */
+
 .hero{
+
     text-align:center;
+
     padding:80px 20px;
+
     background:linear-gradient(135deg,#ffd6e0,#fff8f5);
+
 }
 
 .hero h2{
+
     font-size:48px;
+
     margin-bottom:15px;
+
 }
 
 .hero p{
+
     font-size:20px;
+
     margin-bottom:30px;
+
 }
 
 .hero button{
+
     background:#ff4d6d;
+
     color:white;
+
     border:none;
+
     padding:15px 35px;
+
     border-radius:10px;
+
     font-size:18px;
+
     cursor:pointer;
+
 }
 
 .hero button:hover{
-    background:#e63956;
+
+    background:#d6334f;
+
 }
 
+/* Поиск */
+
+.search-box{
+
+    display:flex;
+
+    justify-content:center;
+
+    padding:25px;
+
+}
+
+#search{
+
+    width:90%;
+
+    max-width:650px;
+
+    padding:15px 20px;
+
+    border-radius:30px;
+
+    border:2px solid #ff8fab;
+
+    font-size:18px;
+
+    outline:none;
+
+}
+
+#search:focus{
+
+    box-shadow:0 0 15px #ff8fab;
+
+}
+
+#notFound{
+
+    display:none;
+
+    text-align:center;
+
+    color:#ff4d6d;
+
+    font-size:22px;
+
+    margin:20px;
+
+}
+
+/* Карточки тортов */
+
 #cakes{
+
     display:grid;
+
     grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
     gap:25px;
+
     padding:50px;
+
 }
 
 .cake{
+
     background:white;
+
     border-radius:15px;
+
     overflow:hidden;
+
     box-shadow:0 5px 15px rgba(0,0,0,.15);
+
     text-align:center;
+
     padding-bottom:20px;
+
+    transition:.3s;
+
+}
+
+.cake:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+
 }
 
 .cake img{
+
     width:100%;
+
     height:250px;
+
     object-fit:cover;
+
 }
 
 .cake h3{
+
     margin:15px 0;
+
 }
 
 .cake p{
+
     font-size:22px;
+
     color:#ff4d6d;
+
     font-weight:bold;
+
 }
 
 .cake button{
+
     background:#ff4d6d;
+
     color:white;
+
     border:none;
+
     padding:12px 30px;
+
     border-radius:10px;
+
     cursor:pointer;
+
 }
 
 .cake button:hover{
+
     background:#d6334f;
+
 }
 
+/* Корзина */
+
 #cart{
+
     background:white;
+
     margin:40px;
+
     padding:30px;
+
     border-radius:15px;
+
     box-shadow:0 5px 15px rgba(0,0,0,.1);
+
 }
 
 input,
 textarea,
 select{
+
     width:100%;
+
     padding:12px;
+
     margin-top:12px;
+
     border:1px solid #ddd;
+
     border-radius:10px;
+
+    font-size:16px;
+
 }
 
 .pay{
+
     width:100%;
+
     padding:16px;
+
     background:#28a745;
+
     color:white;
+
     border:none;
+
     border-radius:10px;
+
     font-size:20px;
+
     cursor:pointer;
+
 }
 
 .pay:hover{
+
     background:#218838;
+
 }
 
+/* Цветы по бокам */
+
+.flowers-frame::before{
+
+    content:"";
+
+    position:fixed;
+
+    left:0;
+
+    top:100px;
+
+    width:90px;
+
+    height:100%;
+
+    background:url("images/flowers-side.png") top left / 100% auto repeat-y;
+
+    z-index:900;
+
+    pointer-events:none;
+
+}
+
+.flowers-frame::after{
+
+    content:"";
+
+    position:fixed;
+
+    right:0;
+
+    top:100px;
+
+    width:90px;
+
+    height:100%;
+
+    background:url("images/flowers-side.png") top left / 100% auto repeat-y;
+
+    transform:scaleX(-1);
+
+    z-index:900;
+
+    pointer-events:none;
+
+}
+
+/* Подвал */
+
 footer{
+
     background:#ff8fab;
+
     color:white;
+
     text-align:center;
+
     padding:40px;
+
     margin-top:50px;
+
+}
+
+/* Телефон */
+
+@media(max-width:768px){
+
+    header{
+
+        flex-direction:column;
+
+        text-align:center;
+
+        padding:20px;
+
+    }
+
+    nav{
+
+        margin-top:15px;
+
+    }
+
+    nav a{
+
+        display:inline-block;
+
+        margin:8px;
+
+    }
+
+    .hero h2{
+
+        font-size:34px;
+
+    }
+
+    #cakes{
+
+        padding:20px;
+
+        grid-template-columns:1fr;
+
+    }
+
+    .cake img{
+
+        height:220px;
+
+    }
+
+    #cart{
+
+        margin:20px;
+
+    }
+
+    body::before{
+
+        height:80px;
+
+        background-size:auto 80px;
+
+    }
+
+    .flowers-frame::before,
+    .flowers-frame::after{
+
+        width:45px;
+
+    }
+
 }
