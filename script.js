@@ -1,24 +1,18 @@
 let cart = [];
 let total = 0;
 
-// =======================
-// Загрузка корзины
-// =======================
+// ==========================================
+// 1. УПРАВЛЕНИЕ КОРЗИНОЙ И ПАМЯТЬЮ
+// ==========================================
 const savedCart = localStorage.getItem("cart");
 if (savedCart) {
     cart = JSON.parse(savedCart);
 }
 
-// =======================
-// Сохранение корзины
-// =======================
 function saveCart() {
     localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-// =======================
-// Добавление в корзину
-// =======================
 function addToCart(name, price) {
     const item = cart.find(cake => cake.name === name);
     if (item) {
@@ -34,9 +28,6 @@ function addToCart(name, price) {
     updateCart();
 }
 
-// =======================
-// Обновление корзины
-// =======================
 function updateCart() {
     const cartItems = document.getElementById("cartItems");
     const totalText = document.getElementById("total");
@@ -50,7 +41,7 @@ function updateCart() {
         total += sum;
 
         cartItems.innerHTML += `
-        <div class="cart-item">
+        <div class="cart-item" style="padding: 10px 0;">
             <h3>${item.name}</h3>
             <p>${item.price} ֏ × ${item.count}</p>
             <p><b>${sum} ֏</b></p>
@@ -58,46 +49,37 @@ function updateCart() {
             <button onclick="plusItem(${index})">➕</button>
             <button onclick="removeItem(${index})">❌ Удалить</button>
         </div>
-        <hr>
+        <hr style="border: 0; border-top: 1px solid #eee;">
         `;
     });
 
     totalText.innerText = total;
 }
 
-// =======================
-// Увеличить количество
-// =======================
 function plusItem(index){
     cart[index].count++;
     saveCart();
     updateCart();
 }
 
-// =======================
-// Уменьшить количество
-// =======================
 function minusItem(index){
     cart[index].count--;
     if(cart[index].count <= 0){
-        cart.splice(index,1);
+        cart.splice(index, 1);
     }
     saveCart();
     updateCart();
 }
 
-// =======================
-// Удалить товар
-// =======================
 function removeItem(index){
-    cart.splice(index,1);
+    cart.splice(index, 1);
     saveCart();
     updateCart();
 }
 
-// =======================
-// Промокод
-// =======================
+// ==========================================
+// 2. ПРОМОКОДЫ И ПОИСК
+// ==========================================
 let promoUsed = false;
 function promo(){
     if(promoUsed){
@@ -115,9 +97,6 @@ function promo(){
     }
 }
 
-// =======================
-// Поиск
-// =======================
 function searchCakes(){
     const text = document.getElementById("search").value.toLowerCase().trim();
     const cakes = document.querySelectorAll(".cake");
@@ -134,17 +113,13 @@ function searchCakes(){
     });
 
     if(notFound) {
-        if(found){
-            notFound.style.display = "none";
-        } else {
-            notFound.style.display = "block";
-        }
+        notFound.style.display = found ? "none" : "block";
     }
 }
 
-// =======================
-// 🧮 ЛОГИКА КАЛЬКУЛЯТОРА ТОРТА
-// =======================
+// ==========================================
+// 3. 🧮 КАЛЬКУЛЯТОР СВОЕГО ТОРТА
+// ==========================================
 function calculateCakePrice() {
     const typeSelect = document.getElementById('cakeType');
     if (!typeSelect) return; 
@@ -170,9 +145,9 @@ function addCustomCakeToCart() {
     alert(`Торт "${fullCustomName}" добавлен в корзину!`);
 }
 
-// =======================
-// Подсказки для способов оплаты
-// =======================
+// ==========================================
+// 4. ОФОРМЛЕНИЕ ЗАКАЗА И ЗАПИСЬ В АДМИНКУ
+// ==========================================
 function togglePaymentMessage() {
     const paymentSelect = document.getElementById('payment');
     const note = document.getElementById('paymentNote');
@@ -188,21 +163,27 @@ function togglePaymentMessage() {
     }
 }
 
-// =======================
-// Красивое оформление заказа через WhatsApp
-// =======================
 function checkout(){
     if(cart.length === 0){
         alert("Корзина пустая.");
         return;
     }
 
-    const name = document.getElementById("name").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const address = document.getElementById("address").value.trim();
+    const nameInput = document.getElementById("name");
+    const phoneInput = document.getElementById("phone");
+    const addressInput = document.getElementById("address");
     const dateInput = document.getElementById("deliveryDate");
     const commentInput = document.getElementById("comment");
     const paymentSelect = document.getElementById("payment");
+
+    if(!nameInput || !phoneInput || !addressInput){
+        alert("Ошибка: Поля оформления не найдены в HTML коде!");
+        return;
+    }
+
+    const name = nameInput.value.trim();
+    const phone = phoneInput.value.trim();
+    const address = addressInput.value.trim();
 
     if(name === "" || phone === "" || address === ""){
         alert("Пожалуйста, заполните имя, телефон и адрес.");
@@ -213,44 +194,111 @@ function checkout(){
     const comment = commentInput ? commentInput.value.trim() : "";
     const paymentMethod = paymentSelect ? paymentSelect.options[paymentSelect.selectedIndex].text : "Не указан";
 
-    // 1. Формируем список товаров с нумерацией
+    // Сохранение заказа в базу данных LocalStorage для админки
+    let currentOrders = JSON.parse(localStorage.getItem("ordersList")) || [];
+    const today = new Date();
+    const formattedDate = today.toLocaleDateString("ru-RU") + " в " + today.toLocaleTimeString("ru-RU", {hour: '2-digit', minute:'2-digit'});
+    
+    const newOrderObj = {
+        date: formattedDate,
+        name: name,
+        phone: phone,
+        address: address,
+        payment: paymentMethod,
+        comment: comment,
+        items: [...cart],
+        total: total
+    };
+    currentOrders.push(newOrderObj);
+    localStorage.setItem("ordersList", JSON.stringify(currentOrders));
+
+    alert("✅ Заказ успешно оформлен и сохранен в панели управления!");
+
+    // Отправка в WhatsApp (открывает окно, но не мешает работе сайта)
     let itemsList = "";
     cart.forEach((item, index) => {
-        const itemSum = item.price * item.count;
-        itemsList += `${index + 1}. *${item.name}*\n    └─ ${item.count} шт. × ${item.price} ֏ = *${itemSum} ֏*\n`;
+        itemsList += `${index + 1}. *${item.name}* — ${item.count} шт.\n`;
     });
-
-    // 2. Шаблон сообщения
-    let message = `✨ *НОВЫЙ ЗАКАЗ: YG CAKES* ✨\n`;
-    message += `────────────────────\n\n`;
-    message += `👤 *Клиент:* ${name}\n`;
-    message += `📞 *Телефон:* ${phone}\n`;
-    message += `📍 *Адрес доставки:* ${address}\n`;
-    message += `📅 *Дата получения:* ${deliveryDate}\n`;
-    message += `💳 *Способ оплаты:* ${paymentMethod}\n`;
-    
-    if(comment) {
-        message += `💬 *Комментарий:* _${comment}_\n`;
-    }
-    
-    message += `\n────────────────────\n`;
-    message += `🛒 *СОСТАВ ЗАКАЗА:*\n\n${itemsList}`;
-    message += `────────────────────\n\n`;
-    message += `💰 *ИТОГО К ОПЛАТЕ:* *${total} ֏*`;
-
-    // 3. Открытие диалога WhatsApp напрямую с владельцем
-    const whatsappUrl = `https://wa.me{encodeURIComponent(message)}`;
+    let message = `✨ *НОВЫЙ ЗАКАЗ: YG CAKES* ✨\n👤 Клиент: ${name}\n📞 Телефон: ${phone}\n📍 Адрес: ${address}\n📅 Дата: ${deliveryDate}\n💳 Оплата: ${paymentMethod}\n💬 Коммент: ${comment}\n🛒 Состав:\n${itemsList}💰 Сумма: ${total} ֏`;
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
 
-    // Очистка корзины после отправки
+    // Очистка формы и корзины
+    nameInput.value = "";
+    phoneInput.value = "";
+    addressInput.value = "";
+    if(commentInput) commentInput.value = "";
+    
     cart = [];
     saveCart();
     updateCart();
 }
 
-// =======================
-// Анимация прокрутки карточек
-// =======================
+// ==========================================
+// 5. АВТОРИЗАЦИЯ ДЛЯ ВХОДА В АДМИНКУ
+// ==========================================
+function openAdminModal() {
+    const modal = document.getElementById("authModal");
+    if (modal) {
+        modal.style.display = "block";
+        document.getElementById("loginError").style.display = "none";
+    }
+}
+
+function closeAdminModal() {
+    const modal = document.getElementById("authModal");
+    if (modal) {
+        modal.style.display = "none";
+        document.getElementById("adminLogin").value = "";
+        document.getElementById("adminPassword").value = "";
+    }
+}
+
+function checkAdminCredentials() {
+    const loginInput = document.getElementById("adminLogin").value.trim();
+    const passwordInput = document.getElementById("adminPassword").value.trim();
+    const errorText = document.getElementById("loginError");
+
+    const correctLogin = "admin";
+    const correctPassword = "yana777"; 
+
+    if (loginInput === correctLogin && passwordInput === correctPassword) {
+        window.location.href = "admin.html";
+    } else {
+        errorText.innerText = "❌ Неверное имя или пароль!";
+        errorText.style.display = "block";
+    }
+}
+
+// ==========================================
+// 6. СВЯЗЬ АДМИНКИ С КАТАЛОГОМ НА ГЛАВНОЙ
+// ==========================================
+function renderCustomCakesOnMainPage() {
+    const container = document.getElementById("customCakesContainer");
+    if (!container) return;
+
+    const customCatalog = JSON.parse(localStorage.getItem("customCatalog")) || [];
+    container.innerHTML = "";
+
+    customCatalog.forEach(cake => {
+        container.innerHTML += `
+            <div class="cake fade-in visible">
+                <img src="${cake.image}" alt="${cake.name}" onclick="openProduct('${cake.name}', ${cake.price}, '${cake.image}')">
+                <h3>${cake.name}</h3>
+                <p>${cake.price} ֏</p>
+                <button onclick="addToCart('${cake.name}', ${cake.price})">Добавить</button>
+            </div>
+        `;
+    });
+}
+
+function openProduct(name, price, image){
+    localStorage.setItem("productName", name);
+    localStorage.setItem("productPrice", price);
+    localStorage.setItem("productImage", image);
+    window.location.href = "product.html";
+}
+
 function checkScrollAnimation() {
     const cakes = document.querySelectorAll('.cake.fade-in');
     cakes.forEach(cake => {
@@ -262,44 +310,9 @@ function checkScrollAnimation() {
     });
 }
 
-window.addEventListener('scroll', checkScrollAnimation);
-
-// =======================
-// Страница товара (Поддержка product.html)
-// =======================
-function openProduct(name,price,image){
-    localStorage.setItem("productName",name);
-    localStorage.setItem("productPrice",price);
-    localStorage.setItem("productImage",image);
-    window.location.href="product.html";
-}
-
-function loadProduct(){
-    const block = document.getElementById("product");
-    if(!block) return;
-
-    const name = localStorage.getItem("productName");
-    const price = localStorage.getItem("productPrice");
-    const image = localStorage.getItem("productImage");
-
-    block.innerHTML = `
-    <img src="${image}" class="product-image" alt="${name}">
-    <h1>${name}</h1>
-    <h2>${price} ֏</h2>
-    <p>Свежий домашний торт от YG Cakes. Изготавливается на заказ из качественных ингредиентов.</p>
-    <button onclick="addToCart('${name}',${price})">🛒 Добавить в корзину</button>
-    <br><br>
-    <button onclick="history.back()">← Назад</button>
-    `;
-}
-
-// =======================
-// Загрузка сайта
-// =======================
-window.onload = function(){
+// Инициализация
+window.addEventListener("DOMContentLoaded", () => {
     updateCart();
-    loadProduct();
-    togglePaymentMessage();
-    calculateCakePrice(); 
-    checkScrollAnimation();
-}
+    renderCustomCakesOnMainPage();
+});
+window.addEventListener('scroll', checkScrollAnimation);
