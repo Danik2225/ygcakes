@@ -1,394 +1,201 @@
 /* ==========================================================================
-   Базовые настройки
+   Базовые настройки сайта
    ========================================================================== */
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Arial, sans-serif;
-}
-
-body {
-    background: #ffffff;
-    color: #4a4a4a;
-    position: relative;
-    overflow-x: hidden;
-}
+*{ margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+body { background: #ffffff; color: #4a4a4a; position: relative; overflow-x: hidden; }
 
 /* ==========================================================================
-   Цветочная рамка (Гирлянды роз из фото)
+   Цветочная рамка (Гирлянды роз)
    ========================================================================== */
-
-/* Верхняя гирлянда роз */
 body::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 180px;
-    background: url("images/flowers-top.png") center top / contain no-repeat;
-    z-index: 1001;
-    pointer-events: none;
+    content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 180px;
+    background: url("images/flowers-top.png") center top / contain no-repeat; z-index: 1001; pointer-events: none;
 }
-
-/* Левая боковая гирлянда роз */
 body::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 120px;
-    height: 100%;
-    background: url("images/flowers-side.png") left top / 100% auto repeat-y;
-    z-index: 1000;
-    pointer-events: none;
+    content: ""; position: absolute; left: 0; top: 0; width: 120px; height: 100%;
+    background: url("images/flowers-side.png") left top / 100% auto repeat-y; z-index: 1000; pointer-events: none;
 }
-
-/* Правая боковая гирлянда роз (отзеркаленная) */
 .flowers-frame-right {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 120px;
-    height: 100%;
-    background: url("images/flowers-side.png") left top / 100% auto repeat-y;
-    transform: scaleX(-1);
-    z-index: 1000;
-    pointer-events: none;
+    position: absolute; right: 0; top: 0; width: 120px; height: 100%;
+    background: url("images/flowers-side.png") left top / 100% auto repeat-y; transform: scaleX(-1); z-index: 1000; pointer-events: none;
 }
 
 /* ==========================================================================
-   Прозрачная Шапка сайта (Header из макета)
+   Шапка сайта (Header)
    ========================================================================== */
 header {
-    background: transparent;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 60px 140px 20px 140px; /* Отступы с расчетом под гирлянды */
-    position: relative;
-    z-index: 1002;
+    background: transparent; display: flex; justify-content: space-between; align-items: center;
+    padding: 60px 140px 20px 140px; position: relative; z-index: 1002;
 }
-
-/* Логотип YG Cakes (Нежный курсив цвета чайной розы как на фото) */
-header h1 {
-    font-family: 'Georgia', cursive, serif;
-    font-size: 38px;
-    color: rgba(233, 110, 145, 0.4);
-    font-weight: 300;
-    font-style: italic;
-}
-
-nav a {
-    color: #b5b5b5;
-    text-decoration: none;
-    margin-left: 25px;
-    font-size: 15px;
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-nav a:hover {
-    color: #e96e91;
-}
+header h1 { font-family: 'Georgia', cursive, serif; font-size: 38px; color: rgba(233, 110, 145, 0.4); font-weight: 300; font-style: italic; }
+nav a { color: #b5b5b5; text-decoration: none; margin-left: 25px; font-size: 15px; font-weight: 500; transition: color 0.3s; }
+nav a:hover { color: #e96e91; }
 
 /* ==========================================================================
-   Главный экран (Hero)
+   Главный экран (Hero) и Блоки
    ========================================================================== */
-.hero {
-    text-align: center;
-    padding: 60px 40px 40px 40px;
-    background: transparent;
-}
+.hero { text-align: center; padding: 60px 40px 40px 40px; background: transparent; }
+.hero h2 { font-family: 'Georgia', serif; font-size: 42px; color: #c23b61; font-weight: 400; margin-bottom: 15px; }
+.hero p { font-size: 16px; color: #7d7d7d; margin-bottom: 35px; font-style: italic; }
 
-.hero h2 {
-    font-family: 'Georgia', serif;
-    font-size: 42px;
-    color: #c23b61;
-    font-weight: 400;
-    margin-bottom: 15px;
-}
-
-.hero p {
-    font-size: 16px;
-    color: #7d7d7d;
-    margin-bottom: 35px;
-    font-style: italic;
-}
-
-/* Элегантная розовая овальная кнопка с тенью (Order Now) */
-.hero button {
-    background: #f45b7e;
-    color: white;
-    border: none;
-    padding: 12px 45px;
+/* ==========================================================================
+   УНИВЕРСАЛЬНЫЙ КРАСИВЫЙ СТИЛЬ ДЛЯ ВСЕХ КНОПОК САЙТА
+   ========================================================================== */
+button, 
+.hero button, 
+.calc-section button, 
+#cart button, 
+#cart button.pay, 
+.auth-content button, 
+.product-box button,
+.admin-lock-btn {
+    background: #f45b7e; 
+    color: white; 
+    border: none; 
+    padding: 12px 35px; 
     border-radius: 25px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(244, 91, 126, 0.3);
+    font-size: 14px; 
+    font-weight: 600; 
+    cursor: pointer; 
+    box-shadow: 0 4px 12px rgba(244, 91, 126, 0.2); 
     transition: all 0.3s ease;
+    display: inline-block;
+    outline: none;
 }
 
-.hero button:hover {
-    background: #e04669;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(244, 91, 126, 0.5);
+/* Эффект при наведении на любые кнопки */
+button:hover,
+.hero button:hover, 
+.calc-section button:hover, 
+#cart button:hover,
+#cart button.pay:hover, 
+.auth-content button:hover, 
+.product-box button:hover,
+.admin-lock-btn:hover {
+    background: #e04669; 
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 18px rgba(244, 91, 126, 0.4);
+}
+
+/* Активное состояние кнопки при клике */
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(244, 91, 126, 0.3);
+}
+
+/* Особый стиль для кнопок «Добавить в корзину» внутри карточек тортов */
+.cake button { 
+    background: #ffffff; 
+    color: #f45b7e; 
+    border: 1.5px solid #f45b7e; 
+    padding: 8px 25px; 
+    border-radius: 20px; 
+    box-shadow: none; 
+}
+.cake button:hover { 
+    background: #f45b7e; 
+    color: white; 
+    box-shadow: 0 4px 10px rgba(244, 91, 126, 0.2); 
+}
+
+/* Маленькие кнопки изменения количества в корзине (➕ и ➖) */
+#cartItems button {
+    padding: 5px 12px;
+    font-size: 12px;
+    border-radius: 12px;
+    margin: 0 2px;
+    box-shadow: none;
+}
+
+/* Кнопка «Удалить» в корзине */
+#cartItems button:last-child {
+    background: #6c757d;
+    box-shadow: none;
+}
+#cartItems button:last-child:hover {
+    background: #5a6268;
+}
+
+/* Кнопка закрытия модального окна (крестик) — сброс стилей кнопки */
+.close-modal {
+    background: transparent !important;
+    color: #aaa !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+}
+.close-modal:hover {
+    color: #333 !important;
+    background: transparent !important;
+    transform: none !important;
+    box-shadow: none !important;
 }
 
 /* ==========================================================================
-   Поиск (Чистый аккуратный инпут)
+   Поиск и Поля форм
    ========================================================================== */
-.search-box {
-    display: flex;
-    justify-content: center;
-    padding: 20px 40px;
-    margin-bottom: 30px;
-}
+.search-box { display: flex; justify-content: center; padding: 20px 40px; margin-bottom: 30px; }
+#search { width: 100%; max-width: 750px; padding: 14px 25px; border-radius: 30px; border: 1px solid #e8e8e8; background: #ffffff; font-size: 15px; color: #4a4a4a; outline: none; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02); transition: all 0.3s ease; }
+#search:focus { border-color: #f45b7e; box-shadow: 0 4px 15px rgba(244, 91, 126, 0.15); }
+#notFound { display: none; text-align: center; color: #f45b7e; font-size: 18px; margin: 20px; font-weight: bold; }
 
-#search {
-    width: 100%;
-    max-width: 750px;
-    padding: 14px 25px;
-    border-radius: 30px;
-    border: 1px solid #e8e8e8;
-    background: #ffffff;
-    font-size: 15px;
-    color: #4a4a4a;
-    outline: none;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
-    transition: all 0.3s ease;
+/* Формы ввода в корзине и калькуляторе */
+input, select, textarea {
+    width: 100%; padding: 12px 20px; border-radius: 12px; border: 1px solid #e8e8e8;
+    margin-bottom: 15px; font-size: 14px; color: #4a4a4a; outline: none; transition: all 0.3s;
 }
-
-#search:focus {
-    border-color: #f45b7e;
-    box-shadow: 0 4px 15px rgba(244, 91, 126, 0.15);
-}
-
-#notFound {
-    display: none;
-    text-align: center;
-    color: #f45b7e;
-    font-size: 18px;
-    margin: 20px;
+input:focus, select:focus, textarea:focus {
+    border-color: #f45b7e; box-shadow: 0 0 8px rgba(244, 91, 126, 0.15);
 }
 
 /* ==========================================================================
    Каталог тортов
    ========================================================================== */
-#cakes {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    padding: 40px 140px;
-}
+#cakes { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; padding: 40px 140px; }
+.cake { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.05); text-align: center; padding-bottom: 25px; border: 1px solid #fcfcfc; transition: all 0.3s ease; }
+.cake:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(244, 91, 126, 0.15); }
+.cake img { width: 100%; height: 260px; object-fit: cover; cursor: pointer; }
+.cake h3 { font-size: 18px; color: #333; margin: 15px 0 8px 0; }
+.cake p { font-size: 20px; color: #f45b7e; font-weight: 700; margin-bottom: 15px; }
 
-.cake {
-    background: white;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-    text-align: center;
-    padding-bottom: 25px;
-    border: 1px solid #fcfcfc;
-    transition: all 0.3s ease;
-}
-
-.cake:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 30px rgba(244, 91, 126, 0.15);
-}
-
-.cake img {
-    width: 100%;
-    height: 260px;
-    object-fit: cover;
-}
-
-.cake h3 {
-    font-size: 18px;
-    color: #333;
-    margin: 15px 0 8px 0;
-    padding: 0 10px;
-}
-
-.cake p {
-    font-size: 20px;
-    color: #f45b7e;
-    font-weight: 700;
-    margin-bottom: 15px;
-}
-
-.cake button {
-    background: #ffffff;
-    color: #f45b7e;
-    border: 1px solid #f45b7e;
-    padding: 10px 30px;
-    border-radius: 20px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.cake button:hover {
-    background: #f45b7e;
-    color: white;
-}
+.cake.fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+.cake.fade-in.visible { opacity: 1; transform: translateY(0); }
 
 /* ==========================================================================
-   Анимация плавного появления при прокрутке
+   СТРАНИЦА ОДНОГО ТОВАРА
    ========================================================================== */
-.cake.fade-in {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+.product-box { text-align: center; background: white; border-radius: 15px; padding: 30px; }
+.product-image {
+    width: 100%; max-width: 420px; height: auto; max-height: 420px;
+    object-fit: cover; border-radius: 12px; margin: 0 auto 20px auto;
+    display: block; box-shadow: 0 5px 20px rgba(0,0,0,0.08);
 }
-
-.cake.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
+.product-box h2 { font-family: 'Georgia', serif; font-size: 32px; color: #333; margin-bottom: 10px; }
 
 /* ==========================================================================
    Калькулятор стоимости своего торта
    ========================================================================== */
-.calc-section {
-    background: #fff9fa;
-    padding: 30px;
-    border-radius: 15px;
-    margin: 40px auto;
-    max-width: 550px;
-    border: 1px solid #ffe3e8;
-    box-shadow: 0 4px 20px rgba(244, 91, 126, 0.05);
-}
-
-.calc-group { margin-bottom: 20px; }
-.calc-group label { display: block; font-weight: 600; color: #555; margin-bottom: 8px; font-size: 14px; }
-.calc-group select, .calc-group input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #e8e8e8; background: white; outline: none; }
-.calc-group select:focus, .calc-group input:focus { border-color: #f45b7e; }
-.calc-result { font-size: 22px; font-weight: bold; color: #c23b61; margin: 20px 0; text-align: center; }
-
-.calc-section button { 
-    background: #f45b7e; 
-    color: white; 
-    border: none; 
-    padding: 14px; 
-    border-radius: 25px; 
-    font-weight: 600; 
-    cursor: pointer; 
-    width: 100%; 
-    box-shadow: 0 4px 12px rgba(244, 91, 126, 0.2);
-    transition: background 0.3s; 
-}
-.calc-section button:hover { background: #e04669; }
+.calc-section { background: #fff9fa; padding: 30px; border-radius: 15px; margin: 40px auto; max-width: 550px; border: 1px solid #ffe3e8; box-shadow: 0 4px 20px rgba(244, 91, 126, 0.05); }
+.calc-section h2 { font-family: 'Georgia', serif; color: #c23b61; margin-bottom: 20px; text-align: center; }
+.calc-group { margin-bottom: 15px; text-align: left; }
+.calc-group label { display: block; font-weight: 600; margin-bottom: 5px; color: #555; }
+.calc-result { font-size: 20px; font-weight: 700; color: #c23b61; text-align: center; margin: 20px 0; }
 
 /* ==========================================================================
-   Корзина покупок и формы
+   Корзина покупок
    ========================================================================== */
-#cart {
-    background: white;
-    margin: 40px 140px;
-    padding: 40px;
-    border-radius: 15px;
-    border: 1px solid #f5f5f5;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.03);
-}
-
-#cart h2 { font-family: 'Georgia', serif; color: #333; margin-bottom: 25px; }
-
-.promo-box {
-    margin-top: 15px;
-    display: flex;
-    gap: 10px;
-}
-.promo-box input { margin-top: 0; width: 70%; }
-.promo-box button { background: #4a4a4a; color: white; border: none; border-radius: 8px; padding: 10px 20px; cursor: pointer; }
-
-input, textarea, select {
-    width: 100%;
-    padding: 14px;
-    margin-top: 15px;
-    border: 1px solid #e8e8e8;
-    border-radius: 8px;
-    font-size: 15px;
-    color: #4a4a4a;
-    background: #fafafa;
-    outline: none;
-    transition: all 0.3s;
-}
-
-input:focus, textarea:focus, select:focus {
-    border-color: #f45b7e;
-    background: white;
-    box-shadow: 0 4px 12px rgba(244, 91, 126, 0.05);
-}
-
-#paymentNote { color: #666; font-size: 14px; margin-top: 10px; }
-
-.pay {
-    width: 100%;
-    padding: 16px;
-    background: #f45b7e;
-    color: white;
-    border: none;
-    border-radius: 25px;
-    font-size: 18px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(244, 91, 126, 0.2);
-    transition: all 0.3s;
-}
-
-.pay:hover {
-    background: #e04669;
-    box-shadow: 0 6px 20px rgba(244, 91, 126, 0.4);
-}
+#cart { max-width: 750px; margin: 40px auto; padding: 30px; background: #fff; border-radius: 15px; box-shadow: 0 5px 25px rgba(0,0,0,0.05); }
+#cart h2 { font-family: 'Georgia', serif; color: #333; margin-bottom: 20px; }
+#cart h3 { margin: 20px 0; color: #333; }
+.cart-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; }
+.promo-box { display: flex; gap: 10px; margin-bottom: 20px; }
+.promo-box input { margin-bottom: 0; }
 
 /* ==========================================================================
    Подвал сайта (Footer)
    ========================================================================== */
-footer {
-    background: #fafafa;
-    color: #7d7d7d;
-    border-top: 1px solid #eee;
-    text-align: center;
-    padding: 50px 40px;
-    margin-top: 80px;
-    font-size: 15px;
-    line-height: 1.8;
-}
-
-footer h2 { color: #333; font-family: 'Georgia', serif; margin-bottom: 15px; }
-
-/* ==========================================================================
-   Адаптивность (Мобильные экраны)
-   ========================================================================== */
-@media(max-width: 992px) {
-    header { padding: 50px 40px 20px 40px; }
-    #cakes, #cart { margin-left: 40px; margin-right: 40px; padding: 20px; }
-    body::after, .flowers-frame-right { width: 40px; }
-}
-
-@media(max-width: 768px) {
-    body::before { height: 100px; }
-    body::after, .flowers-frame-right { display: none; } /* Скрываем ветки на смартфонах */
-    
-    header {
-        flex-direction: column;
-        text-align: center;
-        padding: 40px 20px 10px 20px;
-    }
-    
-    header h1 { font-size: 32px; margin-bottom: 10px; }
-    nav a { display: inline-block; margin: 5px 12px; font-size: 14px; }
-    
-    .hero { padding: 40px 20px; }
-    .hero h2 { font-size: 30px; }
-    
-    #cakes, #cart {
-        margin: 15px;
-        padding: 15px;
-        grid-template-columns: 1fr;
-    }
-}
+footer { text-align: center; padding: 40px 20px; background: #fff9fa; margin-top: 60px; border-top: 1px solid #ffe3e8; }
+footer p { margin-bottom: 10px; font-size: 15px; color: #666; }
+.admin-lock-btn { background: #4a4a4a; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 15px; }
+.admin-lock-btn:hover { background: #333; box-shadow: 0 6px 18px rgba(0,0,0,0.2); }
