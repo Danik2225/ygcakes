@@ -1,163 +1,307 @@
-// Базы данных в localStorage
-let catalog = JSON.parse(localStorage.getItem("customCatalog")) || [];
-let orders = JSON.parse(localStorage.getItem("ordersList")) || [];
+// ===============================
+// YG Cakes Admin Panel
+// ===============================
 
-// ==========================================
-// 1. ФУНКЦИЯ ДОБАВЛЕНИЯ ТОРТА
-// ==========================================
-function addCake() {
-    const nameInput = document.getElementById("cakeName");
-    const priceInput = document.getElementById("cakePrice");
-    const imageInput = document.getElementById("cakeImage");
+let catalog = [];
+let orders = [];
 
-    const name = nameInput.value.trim();
-    const price = Number(priceInput.value);
+// ===============================
+// Загрузка тортов
+// ===============================
+async function loadCakes() {
 
-    if (!name || !price || imageInput.files.length === 0) {
-        alert("❌ Заполните все поля и выберите фото торта!");
+    try {
+
+        const response = await fetch("/api/cakes");
+        catalog = await response.json();
+
+        renderCakes();
+
+    } catch (err) {
+
+        console.error(err);
+        alert("Ошибка загрузки каталога.");
+
+    }
+
+}
+
+// ===============================
+// Загрузка заказов
+// ===============================
+async function loadOrders() {
+
+    try {
+
+        const response = await fetch("/api/orders");
+        orders = await response.json();
+
+        renderOrders();
+
+    } catch (err) {
+
+        console.error(err);
+        alert("Ошибка загрузки заказов.");
+
+    }
+
+}
+// ===============================
+// Добавление торта
+// ===============================
+async function addCake() {
+
+    const name = document.getElementById("cakeName").value.trim();
+    const price = document.getElementById("cakePrice").value;
+    const image = document.getElementById("cakeImage").files[0];
+
+    if (!name || !price || !image) {
+        alert("❌ Заполните все поля.");
         return;
     }
 
-    const file = imageInput.files[0];
-    const reader = new FileReader();
+    const formData = new FormData();
 
-    // Переводим картинку в текстовый формат Base64, чтобы сохранить в память браузера
-    reader.onloadend = function () {
-        const base64Image = reader.result;
+    formData.append("name", name);
+    formData.append("price", price);
+    formData.append("image", image);
 
-        // Создаем объект нового торта
-        const newCake = {
-            id: Date.now(), // Уникальный маркер для удаления
-            name: name,
-            price: price,
-            image: base64Image
-        };
+    try {
 
-        catalog.push(newCake);
-        localStorage.setItem("customCatalog", JSON.stringify(catalog));
+        const response = await fetch("/api/cakes", {
+            method: "POST",
+            body: formData
+        });
 
-        alert(`✅ Торт "${name}" успешно добавлен в базу!`);
-        
-        // Очищаем форму
-        nameInput.value = "";
-        priceInput.value = "";
-        imageInput.value = "";
+        const result = await response.json();
 
-        renderCakes();
-    };
+        if (result.success) {
 
-    if (file) {
-        reader.readAsDataURL(file);
+            alert("✅ Торт успешно добавлен!");
+
+            document.getElementById("cakeName").value = "";
+            document.getElementById("cakePrice").value = "";
+            document.getElementById("cakeImage").value = "";
+
+            loadCakes();
+
+        } else {
+
+            alert("Ошибка при добавлении.");
+
+        }
+
+    } catch (err) {
+
+        console.error(err);
+        alert("Ошибка соединения с сервером.");
+
     }
-}
 
-// ==========================================
-// 2. ВЫВОД И УДАЛЕНИЕ ТОРТОВ
-// ==========================================
+}
+// ===============================
+// Вывод тортов
+// ===============================
 function renderCakes() {
+
     const container = document.getElementById("adminCakesList");
+
     if (!container) return;
 
     if (catalog.length === 0) {
-        container.innerHTML = `<h3 align="center" id="noCakesMessage">Пока нет тортов</h3>`;
+
+        container.innerHTML =
+            `<h3 align="center">Пока нет тортов</h3>`;
+
         return;
     }
 
     container.innerHTML = "";
+
     catalog.forEach(cake => {
+
         container.innerHTML += `
-            <div class="admin-item" style="display: flex; align-items: center; justify-content: space-between; border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; border-radius: 8px;">
-                <div style="display: flex; align-items: center; gap: 15px;">
-                    <img src="${cake.image}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 5px;">
-                    <div>
-                        <strong style="font-size: 16px;">${cake.name}</strong>
-                        <p style="margin: 0; color: #f45b7e;">${cake.price} ֏</p>
-                    </div>
+        <div class="admin-item" style="display:flex;align-items:center;justify-content:space-between;border:1px solid #ddd;padding:10px;margin-bottom:10px;border-radius:8px;">
+
+            <div style="display:flex;align-items:center;gap:15px;">
+
+                <img src="${cake.image}"
+                     style="width:60px;height:60px;object-fit:cover;border-radius:6px;">
+
+                <div>
+
+                    <strong>${cake.name}</strong>
+
+                    <p style="margin:0;color:#f45b7e;">
+                        ${cake.price} ֏
+                    </p>
+
                 </div>
-                <button onclick="deleteCake(${cake.id})" style="background: #dc3545; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">❌ Удалить</button>
+
             </div>
+
+            <button onclick="deleteCake(${cake.id})"
+                style="background:#dc3545;color:white;border:none;padding:8px 15px;border-radius:5px;cursor:pointer;">
+
+                ❌ Удалить
+
+            </button>
+
+        </div>
         `;
+
     });
+
 }
 
-function deleteCake(id) {
-    if (confirm("Вы действительно хотите удалить этот торт из каталога?")) {
-        catalog = catalog.filter(cake => cake.id !== id);
-        localStorage.setItem("customCatalog", JSON.stringify(catalog));
-        renderCakes();
+// ===============================
+// Удаление торта
+// ===============================
+async function deleteCake(id) {
+
+    if (!confirm("Удалить этот торт?")) return;
+
+    try {
+
+        const response = await fetch(`/api/cakes/${id}`, {
+
+            method: "DELETE"
+
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+
+            loadCakes();
+
+        } else {
+
+            alert("Не удалось удалить торт.");
+
+        }
+
+    } catch (err) {
+
+        console.error(err);
+        alert("Ошибка соединения.");
+
     }
-}
 
-// ==========================================
-// 3. ВЫВОД И УДАЛЕНИЕ ЗАКАЗОВ
-// ==========================================
+}
+// ===============================
+// Вывод заказов
+// ===============================
 function renderOrders() {
+
     const container = document.getElementById("adminOrdersList");
+
     if (!container) return;
 
     if (orders.length === 0) {
-        container.innerHTML = `<h3 align="center" id="noOrdersMessage">📦 Заказов нет</h3>`;
+
+        container.innerHTML =
+        `<h3 align="center">📦 Заказов нет</h3>`;
+
         return;
+
     }
 
     container.innerHTML = "";
-    orders.forEach((order, index) => {
-        let itemsHtml = "";
-        if (order.items && Array.isArray(order.items)) {
-            order.items.forEach(item => {
-                itemsHtml += `<li>${item.name} — ${item.count} шт. (${item.price} ֏)</li>`;
-            });
-        }
+
+    orders.forEach(order => {
 
         container.innerHTML += `
-            <div class="admin-order-box" style="border: 1px solid #ff8fab; padding: 15px; margin-bottom: 15px; border-radius: 10px; background: #fffdfd;">
-                <h4>📦 Заказ №${index + 1} от ${order.date || 'Неизвестно'}</h4>
-                <p>👤 <b>Имя:</b> ${order.name || 'Не указано'}</p>
-                <p>📞 <b>Телефон:</b> ${order.phone || 'Не указан'}</p>
-                <p>📍 <b>Адрес:</b> ${order.address || 'Не указан'}</p>
-                <p>💳 <b>Оплата:</b> ${order.payment || 'Не указана'}</p>
-                <p>💬 <b>Комментарий:</b> <i>${order.comment || 'Нет'}</i></p>
-                <h5>🛒 Состав:</h5>
-                <ul>${itemsHtml || '<li>Состав пуст</li>'}</ul>
-                <p style="font-size: 16px;">💰 <b>Сумма заказа: <span style="color: #c23b61;">${order.total || 0} ֏</span></b></p>
-                <button onclick="deleteOrder(${index})" style="background: #6c757d; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Архивировать / Удалить заказ</button>
-            </div>
+
+        <div class="admin-order-box"
+        style="border:1px solid #ff8fab;
+        padding:15px;
+        margin-bottom:15px;
+        border-radius:10px;
+        background:#fffdfd;">
+
+            <h4>📦 Заказ №${order.id}</h4>
+
+            <p><b>Имя:</b> ${order.name}</p>
+
+            <p><b>Телефон:</b> ${order.phone}</p>
+
+            <p><b>Адрес:</b> ${order.address}</p>
+
+            <p><b>Email:</b> ${order.email || "-"}</p>
+
+            <p><b>Сумма:</b> ${order.total} ֏</p>
+
+            <p><b>Статус:</b> ${order.status}</p>
+
+            <button onclick="deleteOrder(${order.id})">
+
+                ❌ Удалить
+
+            </button>
+
+        </div>
+
         `;
+
     });
+
 }
 
-function deleteOrder(index) {
-    if (confirm("Удалить этот заказ из панели?")) {
-        orders.splice(index, 1);
-        localStorage.setItem("ordersList", JSON.stringify(orders));
-        renderOrders();
+// ===============================
+// Удаление заказа
+// ===============================
+async function deleteOrder(id) {
+
+    if (!confirm("Удалить заказ?")) return;
+
+    try {
+
+        const response = await fetch(`/api/orders/${id}`, {
+
+            method: "DELETE"
+
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+
+            loadOrders();
+
+        } else {
+
+            alert("Не удалось удалить заказ.");
+
+        }
+
+    } catch (err) {
+
+        console.error(err);
+
+        alert("Ошибка соединения с сервером.");
+
     }
+
 }
+// ===============================
+// Загрузка при открытии страницы
+// ===============================
+window.onload = () => {
 
-// ==========================================
-// 4. НАСТРОЙКА ПОЧТЫ
-// ==========================================
-function saveEmail() {
-    const emailInput = document.getElementById("email");
-    const email = emailInput.value.trim();
+    loadCakes();
+    loadOrders();
 
-    if (!email) {
-        alert("❌ Введите корректный адрес почты!");
-        return;
-    }
-
-    localStorage.setItem("adminEmail", email);
-    alert(`✅ Почта ${email} успешно сохранена для уведомлений!`);
-}
-
-// Инициализация при загрузке страницы admin.html
-window.onload = function () {
-    renderCakes();
-    renderOrders();
-    
-    // Подгружаем сохраненную почту, если она есть
     const savedEmail = localStorage.getItem("adminEmail");
+
     if (savedEmail) {
-        document.getElementById("email").value = savedEmail;
+
+        const emailInput = document.getElementById("email");
+
+        if (emailInput) {
+            emailInput.value = savedEmail;
+        }
+
     }
+
 };
