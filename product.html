@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Просмотр торта — YG Cakes</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+<header>
+    <h1>YG Cakes</h1>
+    <nav><a href="index.html">← На главную</a></nav>
+</header>
+
+<section style="padding: 40px 20px;">
+    <!-- Ограниченная по ширине карточка товара по центру компьютера -->
+    <div id="product" class="product-box" style="max-width: 600px; margin: 0 auto; padding: 30px; background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid #fcfcfc;">
+        <!-- Сюда подгружаются данные из localStorage скриптом -->
+    </div>
+</section>
+
+<script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const block = document.getElementById("product");
+        if(!block) return;
+        const name = localStorage.getItem("productName") || "Торт на заказ";
+        const price = localStorage.getItem("productPrice") || "0";
+        const image = localStorage.getItem("productImage") || "images/cake1.jpg";
+
+        block.innerHTML = `
+            <img src="${image}" class="product-image">
+            <h2 style="margin-top:15px; font-family:'Georgia', serif; color:#333;">${name}</h2>
+            <p style="font-size:24px; color:#f45b7e; font-weight:bold; margin: 15px 0;">${price} ֏</p>
+            <p style="margin-bottom:25px; color:#777; font-style:italic; line-height:1.6;">Свежий домашний торт от кондитерской YG Cakes. Изготавливается исключительно под заказ из натуральных и свежих продуктов высокого качества.</p>
+            <button onclick="addToCart('${name}', ${price}); alert('Добавлено в корзину!')">🛒 Добавить в корзину</button>
+        `;
+    });
+</script>
+
+<div class="flowers-frame-right"></div>
+</body>
+</html>

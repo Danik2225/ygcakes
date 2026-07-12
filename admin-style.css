@@ -1,0 +1,66 @@
+/* ==========================================================================
+   Базовые настройки админки
+   ========================================================================== */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+body { background: #fff9fa; color: #4a4a4a; padding: 40px; }
+
+header {
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 2px solid #ffe3e8; padding-bottom: 20px; margin-bottom: 35px;
+}
+header h1 { font-family: 'Georgia', serif; color: #c23b61; font-size: 28px; font-weight: 400; }
+header nav a { color: #f45b7e; text-decoration: none; font-weight: 600; transition: color 0.3s; }
+header nav a:hover { color: #e04669; }
+
+/* ==========================================================================
+   Секции и карточки
+   ========================================================================== */
+section {
+    background: white; padding: 30px; border-radius: 15px; margin-bottom: 30px;
+    box-shadow: 0 5px 20px rgba(244, 91, 126, 0.05); border: 1px solid #ffe3e8;
+}
+section h2 { font-family: 'Georgia', serif; color: #333; margin-bottom: 20px; font-size: 22px; font-weight: 400; }
+
+/* Поля ввода */
+input, select, textarea {
+    width: 100%; padding: 12px 20px; border-radius: 12px; border: 1px solid #e8e8e8;
+    margin-bottom: 15px; font-size: 14px; color: #4a4a4a; outline: none; transition: all 0.3s;
+}
+input:focus { border-color: #f45b7e; box-shadow: 0 0 8px rgba(244, 91, 126, 0.15); }
+
+/* ==========================================================================
+   КРАСИВЫЕ КНОПКИ В АДМИНКЕ
+   ========================================================================== */
+button {
+    background: #f45b7e; color: white; border: none; padding: 12px 30px; border-radius: 25px;
+    font-size: 14px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 12px rgba(244, 91, 126, 0.2);
+    transition: all 0.3s ease; display: inline-block; outline: none;
+}
+button:hover {
+    background: #e04669; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(244, 91, 126, 0.4);
+}
+button:active { transform: translateY(0); box-shadow: 0 2px 8px rgba(244, 91, 126, 0.3); }
+
+/* Кнопка «Удалить торт» */
+.admin-item button {
+    background: #dc3545 !important; box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2) !important;
+}
+.admin-item button:hover {
+    background: #bd2130 !important; box-shadow: 0 6px 18px rgba(220, 53, 69, 0.4) !important;
+}
+
+/* Кнопка «Архивировать заказ» */
+.admin-order-box button {
+    background: #6c757d !important; box-shadow: 0 4px 12px rgba(108, 117, 125, 0.1) !important;
+    padding: 8px 20px; font-radius: 20px;
+}
+.admin-order-box button:hover {
+    background: #5a6268 !important; box-shadow: 0 6px 18px rgba(108, 117, 125, 0.3) !important;
+}
+
+/* ==========================================================================
+   Списки элементов
+   ========================================================================== */
+.admin-order-box h4 { color: #c23b61; margin-bottom: 10px; font-family: 'Georgia', serif; }
+.admin-order-box p { margin-bottom: 6px; font-size: 15px; }
+.admin-order-box ul { margin: 10px 0 15px 20px; color: #555; }
