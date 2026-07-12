@@ -194,25 +194,43 @@ function checkout(){
     const comment = commentInput ? commentInput.value.trim() : "";
     const paymentMethod = paymentSelect ? paymentSelect.options[paymentSelect.selectedIndex].text : "Не указан";
 
-    // Сохранение заказа в базу данных LocalStorage для админки
-    let currentOrders = JSON.parse(localStorage.getItem("ordersList")) || [];
-    const today = new Date();
-    const formattedDate = today.toLocaleDateString("ru-RU") + " в " + today.toLocaleTimeString("ru-RU", {hour: '2-digit', minute:'2-digit'});
-    
-    const newOrderObj = {
-        date: formattedDate,
+  // ===============================
+// Отправка заказа на сервер
+// ===============================
+fetch("/api/orders", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
         name: name,
         phone: phone,
         address: address,
-        payment: paymentMethod,
-        comment: comment,
-        items: [...cart],
+        email: "",
         total: total
-    };
-    currentOrders.push(newOrderObj);
-    localStorage.setItem("ordersList", JSON.stringify(currentOrders));
+    })
+})
+.then(response => response.json())
+.then(result => {
 
-    alert("✅ Заказ успешно оформлен и сохранен в панели управления!");
+    if (result.success) {
+
+        alert("✅ Заказ успешно оформлен!");
+
+    } else {
+
+        alert("❌ Ошибка сохранения заказа.");
+
+    }
+
+})
+.catch(err => {
+
+    console.error(err);
+
+    alert("❌ Сервер недоступен.");
+
+});
 
     // Отправка в WhatsApp (открывает окно, но не мешает работе сайта)
     let itemsList = "";
