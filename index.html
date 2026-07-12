@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YG Cakes — Торты на заказ в Ереване</title>
     <link rel="icon" type="image/png" href="images/icon.png">
-    <meta name="description" content="Эксклюзивные торты на заказ в Ереване от YG Cakes! 🎂 Свадебные, детские, бенто-торты. Звоните: 098 434363.">
+    <meta name="description" content="Эксклюзивные торты на заказ в Ереване от YG Cakes! 🎂 Свадебные, детские, бенто-торты.">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
@@ -19,6 +19,8 @@
         <a href="#calculator-cake">Расчет стоимости</a>
         <a href="#cart">Корзина</a>
         <a href="#contact">Контакты</a>
+		<a href="about.html">О нас</a>
+		
     </nav>
 </header>
 
@@ -29,9 +31,12 @@
 <p id="notFound">Ничего не найдено</p>
 
 <section class="hero" id="home">
-    <h2>Delicious Cakes for Every Occasion</h2>
-    <p>Baked with Love, Just for You!</p>
-    <button onclick="document.getElementById('cakes').scrollIntoView({behavior:'smooth'})">Order Now</button>
+    <h1><i style="color: red;">YG Cakes</i></h1>
+	<br>
+	<br>
+    <h2>Вкусные торты на любой случай</h2>
+    <p>Испечено с любовью — специально для вас!</p>
+    <button onclick="document.getElementById('cakes').scrollIntoView({behavior:'smooth'})">КАТАЛОГ</button>
 </section>
 
 <!-- КАТАЛОГ ТОРТОВ -->
@@ -163,7 +168,7 @@
 
 <!-- КАЛЬКУЛЯТОР СТОИМОСТИ -->
 <section id="calculator-cake" class="calc-section">
-    <h2>🧮 Калькулятор своего торта</h2>
+    <h2>Сделайте свой торт</h2>
     <div class="calc-group">
         <label for="cakeType">Тип/Начинка:</label>
         <select id="cakeType" onchange="calculateCakePrice()">
@@ -181,8 +186,8 @@
         <label for="cakeTiers">Количество ярусов:</label>
         <select id="cakeTiers" onchange="calculateCakePrice()">
             <option value="0">1 ярус (+0 ֏)</option>
-            <option value="3000">2 яруса (+3000 ֏ за сложную сборку)</option>
-            <option value="6000">3 яруса (+6000 ֏ за сложную сборку)</option>
+            <option value="3000">2 яруса (+3000 ֏ за сложную работу)</option>
+            <option value="6000">3 яруса (+6000 ֏ за сложную работу)</option>
         </select>
     </div>
     <div class="calc-group">
@@ -190,7 +195,7 @@
         <select id="cakeDecor" onchange="calculateCakePrice()">
             <option value="0">Простой (ягоды/крем) (+0 ֏)</option>
             <option value="2000">С мастикой / фигурками (+2000 ֏)</option>
-            <option value="4000">Сложный свадебный/живые цветы (+4000 ֏)</option>
+            <option value="4000">Сложный свадебный/живые цветы (очень трудно) (+4000 ֏)</option>
         </select>
     </div>
     <div class="calc-result">Примерная стоимость: <span id="calcPrice">12000</span> ֏</div>
@@ -228,8 +233,7 @@
 <footer id="contact">
     <h2>Контакты</h2>
     <p>📞 098 434363 | Instagram: @yana_gulyan | TikTok: @yg_cakes</p>
-    <p>Email: yanagulyanyg@gmail.com</p>
-    <button type="button" class="admin-lock-btn" onclick="openAdminModal()">🔒 Панель управления</button>
+    <button type="button" class="admin-lock-admin" onclick="openAdminModal()">Email: yanagulyanyg@gmail.com</button>
 </footer>
 
 <!-- Модальное окно авторизации админки -->
