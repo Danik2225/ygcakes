@@ -49,18 +49,19 @@ button,
 .auth-content button, 
 .product-box button,
 .admin-lock-btn {
-    background: #f45b7e; 
-    color: white; 
-    border: none; 
-    padding: 12px 35px; 
-    border-radius: 25px;
-    font-size: 14px; 
-    font-weight: 600; 
-    cursor: pointer; 
-    box-shadow: 0 4px 12px rgba(244, 91, 126, 0.2); 
+    background: #ff003a;
+    color: white;
+    border: none;
+    padding: 12px 50px;
+    border-radius: 40px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px #fff;
     transition: all 0.3s ease;
     display: inline-block;
     outline: none;
+    
 }
 
 /* Эффект при наведении на любые кнопки */
@@ -72,9 +73,9 @@ button:hover,
 .auth-content button:hover, 
 .product-box button:hover,
 .admin-lock-btn:hover {
-    background: #e04669; 
+    background: #ff003a; 
     transform: translateY(-2px); 
-    box-shadow: 0 6px 18px rgba(244, 91, 126, 0.4);
+    box-shadow: 0 6px 18px ff003a(0 0 0 / 40%);
 }
 
 /* Активное состояние кнопки при клике */
@@ -137,7 +138,7 @@ button:active {
    ========================================================================== */
 .search-box { display: flex; justify-content: center; padding: 20px 40px; margin-bottom: 30px; }
 #search { width: 100%; max-width: 750px; padding: 14px 25px; border-radius: 30px; border: 1px solid #e8e8e8; background: #ffffff; font-size: 15px; color: #4a4a4a; outline: none; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02); transition: all 0.3s ease; }
-#search:focus { border-color: #f45b7e; box-shadow: 0 4px 15px rgba(244, 91, 126, 0.15); }
+#search:focus { border-color: #ff003a; box-shadow: 0 4px 15px rgba(244, 91, 126, 0.15); }
 #notFound { display: none; text-align: center; color: #f45b7e; font-size: 18px; margin: 20px; font-weight: bold; }
 
 /* Формы ввода в корзине и калькуляторе */
@@ -195,7 +196,7 @@ input:focus, select:focus, textarea:focus {
 /* ==========================================================================
    Подвал сайта (Footer)
    ========================================================================== */
-footer { text-align: center; padding: 40px 20px; background: #fff9fa; margin-top: 60px; border-top: 1px solid #ffe3e8; }
+footer { text-align: center; padding: 40px 20px; background: #fff; margin-top: 60px; border-top: 1px solid #fff; }
 footer p { margin-bottom: 10px; font-size: 15px; color: #666; }
-.admin-lock-btn { background: #4a4a4a; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 15px; }
-.admin-lock-btn:hover { background: #333; box-shadow: 0 6px 18px rgba(0,0,0,0.2); }
+.admin-lock-btn { background: #fff; box-shadow: 0 4px 12px rgba; margin-top: 15px; color:#000;}
+.admin-lock-btn:hover { background: #fff; box-shadow: 0 4px 12px rgba; margin-top: 15px; color:#000;}
