@@ -1,0 +1,95 @@
+/* ==========================
+   Общие настройки
+========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Arial, sans-serif;
+}
+
+body{
+    background:#fffafc;
+    color:#4a4a4a;
+    padding:40px 20px;
+}
+
+/* ==========================
+   Основной блок
+========================== */
+
+.about-container{
+    max-width:900px;
+    margin:0 auto;
+    background:#ffffff;
+    padding:50px;
+    border-radius:25px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    border:1px solid #f4d7df;
+}
+
+.about-container h1{
+    text-align:center;
+    color:#c23b61;
+    font-size:40px;
+    margin-bottom:30px;
+    font-family:Georgia, serif;
+}
+
+.about-container p{
+    font-size:18px;
+    line-height:1.8;
+    margin-bottom:20px;
+    color:#666;
+}
+
+.about-container strong{
+    color:#e96e91;
+}
+
+/* ==========================
+   Преимущества
+========================== */
+
+.features{
+    margin:35px 0;
+    padding:25px;
+    background:#fff6f8;
+    border-radius:18px;
+}
+
+.features p{
+    margin:12px 0;
+    font-size:18px;
+}
+
+/* ==========================
+   Последний текст
+========================== */
+
+.footer-text{
+    font-style:italic;
+    text-align:center;
+    color:#777;
+}
+
+/* ==========================
+   Кнопка
+========================== */
+
+.home-btn{
+    display:inline-block;
+    margin-top:30px;
+    padding:14px 35px;
+    background:#ff003a;
+    color:white;
+    text-decoration:none;
+    border-radius:40px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.home-btn:hover{
+    background:#d90032;
+}
