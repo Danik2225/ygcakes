@@ -1,389 +1,252 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>YG Cakes — Торты на заказ</title>
-
-<!-- Иконка сайта -->
-<link rel="icon" type="image/png" href="images/icon.png">
-
-<!-- Для Google поиска -->
- <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YG Cakes — Торты на заказ</title>
+
+    <!-- Иконка сайта -->
+    <link rel="icon" type="image/png" href="images/icon.png">
+
+    <!-- Для Google поиска -->
     <meta name="description" content="Эксклюзивные торты на заказ в Ереване от YG Cakes! 🎂 Свадебные, детские, бенто-торты и домашний медовик из натуральных продуктов. Звоните: 098 434363.">
+    
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
-
 </head>
-
 <body>
 
 <header>
-
-<h1>🎂 YG Cakes</h1>
-
-<nav>
-
-<a href="#home">Главная</a>
-
-<a href="#cakes">Торты</a>
-
-<a href="#cart">Корзина</a>
-
-<a href="#contact">Контакты</a>
-
-</nav>
-
+    <h1>YG Cakes</h1>
+    <nav>
+        <a href="#home">Главная</a>
+        <a href="#cakes">Торты</a>
+        <a href="#calculator-cake">Расчет стоимости</a>
+        <a href="#cart">Корзина</a>
+        <a href="#contact">Контакты</a>
+    </nav>
 </header>
 
 <div class="search-box">
-
-<input
-
-type="text"
-
-id="search"
-
-placeholder="🔍 Поиск торта..."
-
-onkeyup="searchCakes()">
-
+    <input type="text" id="search" placeholder="🔍 Поиск торта..." onkeyup="searchCakes()">
 </div>
 
 <p id="notFound">Ничего не найдено</p>
 
 <section class="hero" id="home">
-
-<h2>Добро пожаловать в YG Cakes</h2>
-
-<p>
-Торты на заказ • Свадебные • Детские • Бенто
-</p>
-
-<button onclick="document.getElementById('cakes').scrollIntoView({behavior:'smooth'})">
-
-Смотреть каталог
-
-</button>
-
+    <h2>Delicious Cakes for Every Occasion</h2>
+    <p>Baked with Love, Just for You!</p>
+    <button onclick="document.getElementById('cakes').scrollIntoView({behavior:'smooth'})">
+        Order Now
+    </button>
 </section>
 
+<!-- КАТАЛОГ ТОРТОВ С АНИМАЦИЕЙ -->
 <section id="cakes">
-
-<div class="cake">
-
-<img src="images/cake1.jpg">
-
-<h3>🍓 Клубничный торт</h3>
-
-<p>13000 ֏</p>
-
-<button onclick="addToCart('Клубничный торт',13000)">
-Добавить
-</button>
-
-</div>
-
-<div class="cake">
-
-<img src="images/cake2.jpg">
-
-<h3>Прага</h3>
-
-<p>13000 ֏</p>
-
-<button onclick="addToCart('Прага',13000)">
-Добавить
-</button>
-
-</div>
-
-<div class="cake">
-
-<img src="images/cake3.jpg">
-
-<h3>💍 Свадебный торт</h3>
-
-<p>25000 ֏</p>
-
-<button onclick="addToCart('Свадебный торт',25000)">
-Добавить
-</button>
-
-</div>
-
-<div class="cake">
-
-<img src="images/cake4.jpg">
-
-<h3>Торт FIFA</h3>
-
-<p>20000 ֏</p>
-
-<button onclick="addToCart('Торт FIFA',20000)">
-Добавить
-</button>
-
-</div>
-
-<div class="cake">
-
-<img src="images/cake5.jpg">
-
-<h3>Малиновый торт</h3>
-
-<p>15000 ֏</p>
-
-<button onclick="addToCart('Малиновый торт',15000)">
-Добавить
-</button>
-
-</div>
-
-<div class="cake">
-
-<img src="images/cake6.jpg">
-
-<h3>Торт на день рождения</h3>
-
-<p>15000 ֏</p>
-
-<button onclick="addToCart('Торт на день рождения',16000)">
-Добавить
-</button>
-
-</div>
-
-<div class="cake">
-
-<img src="images/cake7.jpg">
-
-<h3>Желейный торт</h3>
-
-<p>12000 ֏</p>
-
-<button onclick="addToCart('Желейный торт',12000)">
-Добавить
-</button>
-
-</div>
-
-<div class="cake">
-
-<img src="images/cake8.jpg">
-
-<h3>Торт орхидея</h3>
-
-<p>20000 ֏</p>
-
-<button onclick="addToCart('Торт орхидея',15000)">
-Добавить
-</button>
-
-</div>
-
-<div class="cake">
-
-<img src="images/cake11.jpg">
-
-<h3>Медовик</h3>
-
-<p>12000 ֏</p>
-
-<button onclick="addToCart('Медовик',12000)">
-Добавить
-</button>
-
-</div>
-
-<div class="cake">
-
-<img src="images/cake0.jpg">
-
-<h3>Кофейный торт</h3>
-
-<p>15000 ֏</p>
-
-<button onclick="addToCart('Кофейный торт',15000)">
-Добавить
-</button>
-
-</div>
-
-<div class="cake">
-
-<img src="images/cake12.jpg">
-
-<h3>🎂 Детский торт</h3>
-
-<p>10000 ֏</p>
-
-<button onclick="addToCart('Детский торт',10000)">
-Добавить
-</button>
-
-</div>
-
-<div class="cake">
-
-<img src="images/cake14.jpg">
-
-<h3>Торт бургер</h3>
-
-<p>17000 ֏</p>
-
-<button onclick="addToCart('Торт бургер',17000)">
-Добавить
-</button>
-
-</div>
-
-<div class="cake">
-
-<img src="images/cake15.jpg">
-
-<h3>❤️ Девячий Торт</h3>
-
-<p>23000 ֏</p>
-
-<button onclick="addToCart('девячий Торт',23000)">
-Добавить
-</button>
-
-</div>
-
-<div class="cake">
-
-<img src="images/cake17.jpg">
-
-<h3>Новогодний торт</h3>
-
-<p>25000 ֏</p>
-
-<button onclick="addToCart('Новогодний',25000)">
-Добавить
-</button>
-
-</div>
-
-<div class="cake">
-
-<img src="images/cake18.jpg">
-
-<h3>🧁 Бенто-торт</h3>
-
-<p>5000 ֏</p>
-
-<button onclick="addToCart('Бенто-торт',5000)">
-Добавить
-</button>
-
-</div>
-
-<div class="cake">
-
-<img src="images/cake19.jpg">
-
-<h3>🎉 Праздничный торт</h3>
-
-<p>25000 ֏</p>
-
-<button onclick="addToCart('Праздничный торт',25000)">
-Добавить
-</button>
-
-</div>
-
-<div class="cake">
-
-<img src="images/cake20.jpg">
-
-<h3>Мешок с золотом</h3>
-
-<p>25000 ֏</p>
-
-<button onclick="addToCart('Мешок с золотом',25000)">
-Добавить
-</button>
-
-</div>
-
+    <div class="cake fade-in">
+        <img src="images/cake1.jpg" alt="Клубничный торт">
+        <h3>🍓 Клубничный торт</h3>
+        <p>13000 ֏</p>
+        <button onclick="addToCart('🍓 Клубничный торт', 13000)">Добавить</button>
+    </div>
+
+    <div class="cake fade-in">
+        <img src="images/cake2.jpg" alt="Прага">
+        <h3>Прага</h3>
+        <p>13000 ֏</p>
+        <button onclick="addToCart('Прага', 13000)">Добавить</button>
+    </div>
+
+    <div class="cake fade-in">
+        <img src="images/cake3.jpg" alt="Свадебный торт">
+        <h3>💍 Свадебный торт</h3>
+        <p>25000 ֏</p>
+        <button onclick="addToCart('💍 Свадебный торт', 25000)">Добавить</button>
+    </div>
+
+    <div class="cake fade-in">
+        <img src="images/cake4.jpg" alt="Торт FIFA">
+        <h3>Торт FIFA</h3>
+        <p>20000 ֏</p>
+        <button onclick="addToCart('Торт FIFA', 20000)">Добавить</button>
+    </div>
+
+    <div class="cake fade-in">
+        <img src="images/cake5.jpg" alt="Малиновый торт">
+        <h3>Малиновый торт</h3>
+        <p>15000 ֏</p>
+        <button onclick="addToCart('Малиновый торт', 15000)">Добавить</button>
+    </div>
+
+    <div class="cake fade-in">
+        <img src="images/cake6.jpg" alt="Торт на день рождения">
+        <h3>Торт на день рождения</h3>
+        <p>15000 ֏</p>
+        <button onclick="addToCart('Торт на день рождения', 15000)">Добавить</button>
+    </div>
+
+    <div class="cake fade-in">
+        <img src="images/cake7.jpg" alt="Желейный торт">
+        <h3>Желейный торт</h3>
+        <p>12000 ֏</p>
+        <button onclick="addToCart('Желейный торт', 12000)">Добавить</button>
+    </div>
+
+    <div class="cake fade-in">
+        <img src="images/cake8.jpg" alt="Торт орхидея">
+        <h3>Торт орхидея</h3>
+        <p>20000 ֏</p>
+        <button onclick="addToCart('Торт орхидея', 20000)">Добавить</button>
+    </div>
+
+    <div class="cake fade-in">
+        <img src="images/cake11.jpg" alt="Медовик">
+        <h3>Медовик</h3>
+        <p>12000 ֏</p>
+        <button onclick="addToCart('Медовик', 12000)">Добавить</button>
+    </div>
+
+    <div class="cake fade-in">
+        <img src="images/cake0.jpg" alt="Кофейный торт">
+        <h3>Кофейный торт</h3>
+        <p>15000 ֏</p>
+        <button onclick="addToCart('Кофейный торт', 15000)">Добавить</button>
+    </div>
+
+    <div class="cake fade-in">
+        <img src="images/cake12.jpg" alt="Детский торт">
+        <h3>🎂 Детский торт</h3>
+        <p>10000 ֏</p>
+        <button onclick="addToCart('🎂 Детский торт', 10000)">Добавить</button>
+    </div>
+
+    <div class="cake fade-in">
+        <img src="images/cake14.jpg" alt="Торт бургер">
+        <h3>Торт бургер</h3>
+        <p>17000 ֏</p>
+        <button onclick="addToCart('Торт бургер', 17000)">Добавить</button>
+    </div>
+
+    <div class="cake fade-in">
+        <img src="images/cake15.jpg" alt="Девичьей Торт">
+        <h3>❤️ Девичьей Торт</h3>
+        <p>23000 ֏</p>
+        <button onclick="addToCart('❤️ Девичьей Торт', 23000)">Добавить</button>
+    </div>
+
+    <div class="cake fade-in">
+        <img src="images/cake17.jpg" alt="Новогодний торт">
+        <h3>Новогодний торт</h3>
+        <p>25000 ֏</p>
+        <button onclick="addToCart('Новогодний торт', 25000)">Добавить</button>
+    </div>
+
+    <div class="cake fade-in">
+        <img src="images/cake18.jpg" alt="Бенто-торт">
+        <h3>🧁 Бенто-торт</h3>
+        <p>5000 ֏</p>
+        <button onclick="addToCart('🧁  Бенто-торт', 5000)">Добавить</button>
+    </div>
+
+    <div class="cake fade-in">
+        <img src="images/cake19.jpg" alt="Праздничный торт">
+        <h3>🎉 Праздничный торт</h3>
+        <p>25000 ֏</p>
+        <button onclick="addToCart('🎉 Праздничный торт', 25000)">Добавить</button>
+    </div>
+
+    <div class="cake fade-in">
+        <img src="images/cake20.jpg" alt="Мешок с золотом">
+        <h3>Мешок с золотом</h3>
+        <p>25000 ֏</p>
+        <button onclick="addToCart('Мешок с золотом', 25000)">Добавить</button>
+    </div>
 </section>
 
+<!-- КАЛЬКУЛЯТОР СТОИМОСТИ СВОЕГО ТОРТА -->
+<section id="calculator-cake" class="calc-section">
+    <h2 style="text-align: center;">🧮 Калькулятор своего торта</h2>
+    
+    <div class="calc-group">
+        <label for="cakeType">Тип/Начинка:</label>
+        <select id="cakeType" onchange="calculateCakePrice()">
+            <option value="6000">Классический бисквит (6000 ֏/кг)</option>
+            <option value="7000">Шоколадный / Прага (7000 ֏/кг)</option>
+            <option value="8000">Ягодный / Свежая малина (8000 ֏/кг)</option>
+            <option value="6500">Домашний Медовик (6500 ֏/кг)</option>
+        </select>
+    </div>
+
+    <div class="calc-group">
+        <label for="cakeWeight">Вес торта (в кг):</label>
+        <input type="number" id="cakeWeight" value="2" min="1" max="15" oninput="calculateCakePrice()">
+    </div>
+
+    <div class="calc-group">
+        <label for="cakeTiers">Количество ярусов:</label>
+        <select id="cakeTiers" onchange="calculateCakePrice()">
+            <option value="0">1 ярус (+0 ֏)</option>
+            <option value="3000">2 яруса (+3000 ֏ за сложную сборку)</option>
+            <option value="6000">3 яруса (+6000 ֏ за сложную сборку)</option>
+        </select>
+    </div>
+
+    <div class="calc-group">
+        <label for="cakeDecor">Сложность декора:</label>
+        <select id="cakeDecor" onchange="calculateCakePrice()">
+            <option value="0">Простой (ягоды/крем) (+0 ֏)</option>
+            <option value="2000">С мастикой / фигурками (+2000 ֏)</option>
+            <option value="4000">Сложный свадебный/живые цветы (+4000 ֏)</option>
+        </select>
+    </div>
+
+    <div class="calc-result">
+        Примерная стоимость: <span id="calcPrice">12000</span> ֏
+    </div>
+    <div style="text-align: center; margin-top: 15px;">
+        <button type="button" onclick="addCustomCakeToCart()">🛍️ Добавить этот расчет в корзину</button>
+    </div>
+</section>
+
+<!-- КОРЗИНА И ОФОРМЛЕНИЕ ЗАКАЗА -->
 <section id="cart">
+    <h2>🛒 Корзина</h2>
+    <div id="cartItems"></div>
+    <h3>Итого: <span id="total">0</span> ֏</h3>
 
-<h2>🛒 Корзина</h2>
+    <div class="promo-box">
+        <input id="promo" placeholder="Промокод">
+        <button type="button" onclick="promo()">Применить</button>
+    </div>
 
-<div id="cartItems"></div>
+    <input id="name" placeholder="Ваше имя">
+    <input id="phone" placeholder="Телефон">
+    <input id="address" placeholder="Адрес доставки">
+    <input type="date" id="deliveryDate">
+    <textarea id="comment" placeholder="Комментарий к заказу (например: надпись на торте, аллергия)"></textarea>
 
-<h3>
-
-Итого:
-
-<span id="total">0</span> ֏
-
-</h3>
-
-<input id="name" placeholder="Ваше имя">
-
-<input id="phone" placeholder="Телефон">
-
-<input id="address" placeholder="Адрес доставки">
-
-<input type="date">
-
-<textarea placeholder="Комментарий"></textarea>
-
-<h3>Способ оплаты</h3>
-
-<select id="payment">
-
-<option>Visa</option>
-
-<option>MasterCard</option>
-
-<option>Idram</option>
-
-<option>Оплата при получении</option>
-
-</select>
-
-<br><br>
-
-<button class="pay" onclick="checkout()">
-
-💳 Оплатить
-
-</button>
-
+    <h3>Способ оплаты</h3>
+    <select id="payment" onchange="togglePaymentMessage()">
+        <option value="cash">💵 Оплата при получении</option>
+        <option value="idram">🧡 Idram</option>
+        <option value="card">💳 Visa / MasterCard</option>
+    </select>
+    
+    <p id="paymentNote"></p>
+    <br><br>
+    <button class="pay" onclick="checkout()">✅ Оформить заказ</button>
 </section>
 
 <footer id="contact">
-
-<h2>Контакты</h2>
-
-<p>📞 098 434363</p>
-
-<p>Instagram: @yana_gulyan</p>
-
-<p>TikTok: @yg_cakes</p>
-
-<p>Email: yanagulyanyg@gmail.com</p>
-
+    <h2>Контакты</h2>
+    <p>📞 098 434363</p>
+    <p>Instagram: @yana_gulyan</p>
+    <p>TikTok: @yg_cakes</p>
+    <p>Email: yanagulyanyg@gmail.com</p>
 </footer>
- 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-<script>
-emailjs.init({
-    publicKey: "oCgaxtaiyEZSEFUAE"
-});
-</script>
- 
+<!-- Блок для правой боковой гирлянды -->
+<div class="flowers-frame-right"></div>
+
 </body>
-
 </html>
