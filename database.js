@@ -19,15 +19,19 @@ db.serialize(() => {
     `);
 
     db.run(`
-        CREATE TABLE IF NOT EXISTS orders (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT,
-            phone TEXT,
-            address TEXT,
-            email TEXT,
-            total INTEGER,
-            status TEXT DEFAULT 'Новый'
-        )
+CREATE TABLE IF NOT EXISTS orders (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    phone TEXT,
+    address TEXT,
+    email TEXT,
+    deliveryDate TEXT,
+    payment TEXT,
+    comment TEXT,
+    items TEXT,
+    total INTEGER,
+    status TEXT
+)
     `);
 });
 
