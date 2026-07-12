@@ -1,94 +1,45 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>YG Cakes | Админ-панель</title>
-
-<link rel="stylesheet" href="style.css">
-
-<script src="admin.js" defer></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YG Cakes | Панель кондитера</title>
+    <link rel="stylesheet" href="admin-style.css">
+    <script src="admin.js" defer></script>
 </head>
-
 <body>
 
-<h1 align="center">👨‍💼 Админ-панель</h1>
+<header>
+    <h1>👨‍💼 Панель управления кондитерской</h1>
+    <nav><a href="index.html">Выйти на сайт →</a></nav>
+</header>
 
-<hr>
+<section>
+    <h2>➕ Добавить новый торт в каталог</h2>
+    <input id="cakeName" type="text" placeholder="Название торта">
+    <input id="cakePrice" type="number" placeholder="Цена торта в драмах (֏)">
+    <div style="margin: 15px 0;">
+        <label style="font-weight: bold; display: block; margin-bottom: 5px;">Фотография торта:</label>
+        <input id="cakeImage" type="file" accept="image/*">
+    </div>
+    <button onclick="addCake()">➕ Опубликовать торт</button>
+</section>
 
-<h2>➕ Добавить торт</h2>
+<section>
+    <h2>🎂 Торты, добавленные вручную</h2>
+    <div id="adminCakesList"><h3>Загрузка каталога...</h3></div>
+</section>
 
-<input
-id="cakeName"
-type="text"
-placeholder="Название торта">
+<section>
+    <h2>📦 Последние заказы клиентов</h2>
+    <div id="adminOrdersList"><h3>Заказов нет</h3></div>
+</section>
 
-<br><br>
-
-<input
-id="cakePrice"
-type="number"
-placeholder="Цена">
-
-<br><br>
-
-<label><b>Фото торта</b></label>
-
-<br><br>
-
-<input
-id="cakeImage"
-type="file"
-accept="image/*">
-
-<br><br>
-
-<button onclick="addCake()">
-➕ Добавить торт
-</button>
-
-<hr>
-
-<h2>🎂 Все торты</h2>
-
-<div id="cakes">
-
-<h3 align="center">
-Пока нет тортов
-</h3>
-
-</div>
-
-<hr>
-
-<h2>📦 Заказы</h2>
-
-<div id="orders">
-
-<h3 align="center">
-📦 Заказов нет
-</h3>
-
-</div>
-
-<hr>
-
-<h2>📧 Почта для получения заказов</h2>
-
-<input
-id="email"
-type="email"
-placeholder="Введите почту">
-
-<button onclick="saveEmail()">
-💾 Сохранить
-</button>
+<section>
+    <h2>📧 Настройка уведомлений</h2>
+    <input id="email" type="email" placeholder="Введите ваш email">
+    <button onclick="saveEmail()" style="background:#4a4a4a;">💾 Сохранить почту</button>
+</section>
 
 </body>
-
 </html>
