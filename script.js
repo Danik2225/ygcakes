@@ -157,7 +157,7 @@ function togglePaymentMessage() {
     if (method === 'idram') {
         note.innerText = "После оформления заказа переведите сумму на Idram ID: 098434363";
     } else if (method === 'card') {
-        note.innerText = "Оплата онлайн временно недоступна. Выберите другой способ или ожидайте ссылку.";
+        note.innerText = "";
     } else {
         note.innerText = "Вы сможете оплатить заказ курьеру наличными или картой при получении.";
     }
@@ -194,52 +194,58 @@ function checkout(){
     const comment = commentInput ? commentInput.value.trim() : "";
     const paymentMethod = paymentSelect ? paymentSelect.options[paymentSelect.selectedIndex].text : "Не указан";
 
-  // ===============================
-// Отправка заказа на сервер
-// ===============================
-fetch("/api/orders", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-        name: name,
-        phone: phone,
-        address: address,
-        email: "",
-        total: total
-    })
-})
-.then(response => response.json())
-.then(result => {
+    // Сохранение заказа в базу данных LocalStorage для админки
+    let currentOrders = JSON.parse(localStorage.getItem("ordersList")) || [];
+    const today = new Date();
+    const formattedDate = today.toLocaleDateString("ru-RU") + " в " + today.toLocaleTimeString("ru-RU", {hour: '2-digit', minute:'2-digit'});
+    
+let lastOrderNumber = Number(localStorage.getItem("lastOrderNumber")) || 0;
 
-    if (result.success) {
+lastOrderNumber++;
 
-        alert("✅ Заказ успешно оформлен!");
+localStorage.setItem(
+    "lastOrderNumber",
+    lastOrderNumber
+);
 
-    } else {
+// номер заказа 001, 002, 003
+let orderNumber = String(lastOrderNumber).padStart(3, "0");
 
-        alert("❌ Ошибка сохранения заказа.");
 
-    }
+const newOrderObj = {
+    orderNumber: orderNumber,
+    date: formattedDate,
+    name: name,
+    phone: phone,
+    address: address,
+    payment: paymentMethod,
+    comment: comment,
+    items: [...cart],
+    total: total,
+    status: "Ожидает оплаты"
+};
+    currentOrders.push(newOrderObj);
+    localStorage.setItem("ordersList", JSON.stringify(currentOrders));
 
-})
-.catch(err => {
+if(paymentSelect.value === "card"){
 
-    console.error(err);
+    let payNumber = document.getElementById("payNumber");
 
-    alert("❌ Сервер недоступен.");
+if(payNumber){
+    payNumber.innerText = orderNumber;
+}
 
-});
+    document.getElementById("payWindow").style.display = "block";
 
-    // Отправка в WhatsApp (открывает окно, но не мешает работе сайта)
-    let itemsList = "";
-    cart.forEach((item, index) => {
-        itemsList += `${index + 1}. *${item.name}* — ${item.count} шт.\n`;
-    });
-    let message = `✨ *НОВЫЙ ЗАКАЗ: YG CAKES* ✨\n👤 Клиент: ${name}\n📞 Телефон: ${phone}\n📍 Адрес: ${address}\n📅 Дата: ${deliveryDate}\n💳 Оплата: ${paymentMethod}\n💬 Коммент: ${comment}\n🛒 Состав:\n${itemsList}💰 Сумма: ${total} ֏`;
-    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
+}
+else{
+
+    alert(
+    "✅ Заказ №" + orderNumber + " создан!\n\n" +
+    "Укажите этот номер при оплате: " + orderNumber
+    );
+
+}
 
     // Очистка формы и корзины
     nameInput.value = "";
@@ -334,3 +340,7 @@ window.addEventListener("DOMContentLoaded", () => {
     renderCustomCakesOnMainPage();
 });
 window.addEventListener('scroll', checkScrollAnimation);
+
+function closePay(){
+    document.getElementById("payWindow").style.display = "none";
+}
