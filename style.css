@@ -49,7 +49,7 @@ button,
 .auth-content button, 
 .product-box button,
 .admin-lock-btn {
-    background: #ff003a;
+    background:#f45b7e;
     color: white;
     border: none;
     padding: 12px 50px;
@@ -57,7 +57,7 @@ button,
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    box-shadow: 0 4px 12px #fff;
+    box-shadow:0 4px 12px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
     display: inline-block;
     outline: none;
@@ -75,7 +75,7 @@ button:hover,
 .admin-lock-btn:hover {
     background: #ff003a; 
     transform: translateY(-2px); 
-    box-shadow: 0 6px 18px ff003a(0 0 0 / 40%);
+    box-shadow: 0 6px 18px rgba(255,0,58,0.4);
 }
 
 /* Активное состояние кнопки при клике */
@@ -189,14 +189,62 @@ input:focus, select:focus, textarea:focus {
 #cart { max-width: 750px; margin: 40px auto; padding: 30px; background: #fff; border-radius: 15px; box-shadow: 0 5px 25px rgba(0,0,0,0.05); }
 #cart h2 { font-family: 'Georgia', serif; color: #333; margin-bottom: 20px; }
 #cart h3 { margin: 20px 0; color: #333; }
-.cart-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; }
+.cart-item {
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:10px;
+padding:10px 0;
+}
 .promo-box { display: flex; gap: 10px; margin-bottom: 20px; }
 .promo-box input { margin-bottom: 0; }
 
 /* ==========================================================================
    Подвал сайта (Footer)
    ========================================================================== */
-footer { text-align: center; padding: 40px 20px; background: #fff; margin-top: 60px; border-top: 1px solid #fff; }
+footer { text-align: center; padding: 40px 20px; background: #fff; margin-top: 60px; border-top: 1px solid #ffe3e8; }
 footer p { margin-bottom: 10px; font-size: 15px; color: #666; }
-.admin-lock-btn { background: #fff; box-shadow: 0 4px 12px rgba; margin-top: 15px; color:#000;}
-.admin-lock-btn:hover { background: #fff; box-shadow: 0 4px 12px rgba; margin-top: 15px; color:#000;}
+.admin-lock-btn { 
+    background:#fff;
+    box-shadow:0 4px 12px rgba(0,0,0,0.15);
+    margin-top:15px;
+    color:#000;
+}
+
+.admin-lock-btn:hover { 
+    background:#fff;
+    box-shadow:0 6px 18px rgba(0,0,0,0.25);
+    margin-top:15px;
+    color:#000;
+}
+
+.pay-window{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+z-index:9999;
+}
+
+.pay-card{
+background:white;
+width:350px;
+padding:30px;
+border-radius:25px;
+margin:150px auto;
+text-align:center;
+box-shadow:0 10px 40px rgba(0,0,0,0.3);
+}
+
+.card-number{
+font-size:25px;
+font-weight:bold;
+letter-spacing:3px;
+background:#f5f5f5;
+padding:20px;
+border-radius:15px;
+margin:20px 0;
+}
