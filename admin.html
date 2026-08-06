@@ -9,6 +9,26 @@
 </head>
 <body>
 
+<div id="loginScreen" style="max-width:350px;margin:120px auto;text-align:center;background:#fff;padding:25px;border-radius:15px;box-shadow:0 0 20px rgba(0,0,0,.2);">
+
+    <h2>🔒 Вход в админ-панель</h2>
+
+    <input
+        type="password"
+        id="adminPassword"
+        placeholder="Введите пароль"
+        style="width:90%;padding:10px;margin:15px 0;">
+
+    <br>
+
+    <button onclick="login()">Войти</button>
+
+    <p id="error" style="color:red;"></p>
+
+</div>
+
+<div id="adminPanel" style="display:none;">
+
 <header>
     <h1>👨‍💼 Панель управления кондитерской</h1>
     <nav><a href="index.html">Выйти на сайт →</a></nav>
@@ -40,6 +60,7 @@
     <input id="email" type="email" placeholder="Введите ваш email">
     <button onclick="saveEmail()" style="background:#4a4a4a;">💾 Сохранить почту</button>
 </section>
+</div>
 
 </body>
 </html>
