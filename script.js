@@ -344,3 +344,22 @@ window.addEventListener('scroll', checkScrollAnimation);
 function closePay(){
     document.getElementById("payWindow").style.display = "none";
 }
+document.addEventListener('DOMContentLoaded', () => {
+    const burger = document.getElementById('burgerMenu');
+    const nav = document.getElementById('navMenu');
+
+    if (burger && nav) {
+        burger.addEventListener('click', () => {
+            burger.classList.toggle('active');
+            nav.classList.toggle('active');
+        });
+
+        // Закрываем меню при клике на любую ссылку
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                burger.classList.remove('active');
+                nav.classList.remove('active');
+            });
+        });
+    }
+});
