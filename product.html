@@ -4,27 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Просмотр торта — YG Cakes</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
 <body>
 
 <header>
-    <h1><a href="index.html">YG Cakes</a></h1>
-    
-    <div class="burger-menu" id="burgerMenu">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-
-    <nav id="navMenu">
-        <a href="index.html#home">Главная</a>
-        <a href="index.html#cakes">Торты</a>
-        <a href="index.html#calculator-cake">Расчет стоимости</a>
-        <a href="index.html#cart">Корзина</a>
-        <a href="index.html#contact">Контакты</a>
-        <a href="About.html">О нас</a>
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">YG Cakes</a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Переключить навигацию">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#home">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#cakes">Торты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#calculator-cake">Расчет стоимости</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#cart">Корзина</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#contact">Контакты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="About.html">О нас</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
 </header>
 
@@ -44,7 +64,7 @@
         const image = localStorage.getItem("productImage") || "images/cake1.jpg";
 
         block.innerHTML = `
-            <img src="${image}" class="product-image">
+            <img src="${image}" class="product-image" alt="${name}">
             <h2 style="margin-top:15px; font-family:'Georgia', serif; color:#333;">${name}</h2>
             <p style="font-size:24px; color:#f45b7e; font-weight:bold; margin: 15px 0;">${price} ֏</p>
             <p style="margin-bottom:25px; color:#777; font-style:italic; line-height:1.6;">Свежий домашний торт от кондитерской YG Cakes. Изготавливается исключительно под заказ из натуральных и свежих продуктов высокого качества.</p>
@@ -54,5 +74,8 @@
 </script>
 
 <div class="flowers-frame-right"></div>
+
+<!-- Bootstrap 5 JS Bundle (для работы мобильного меню) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
