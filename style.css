@@ -5,7 +5,7 @@
     margin: 0; 
     padding: 0; 
     box-sizing: border-box; 
-    font-family: none;
+    font-family: inherit;
 }
 
 body { 
@@ -16,7 +16,7 @@ body {
 }
 
 /* ==========================================================================
-   Цветочная рамка (Гирлянды роз) - ИСПРАВЛЕНЫ СЛОИ
+   Цветочная рамка (Гирлянды роз)
    ========================================================================== */
 body::before {
     content: ""; 
@@ -26,8 +26,8 @@ body::before {
     width: 100%; 
     height: 180px;
     background: url("images/flowers-top.png") center top / contain no-repeat; 
-    z-index: 90; 
-    pointer-events: none; /* Клики пальца пролетают сквозь гирлянду */
+    z-index: 100; 
+    pointer-events: none;
 }
 
 body::after {
@@ -38,8 +38,8 @@ body::after {
     width: 120px; 
     height: 100%;
     background: url("images/flowers-side.png") left top / 100% auto repeat-y; 
-    z-index: 90; 
-    pointer-events: none; /* Клики пальца пролетают сквозь гирлянду */
+    z-index: 99; 
+    pointer-events: none;
 }
 
 .flowers-frame-right {
@@ -50,85 +50,49 @@ body::after {
     height: 100%;
     background: url("images/flowers-side.png") left top / 100% auto repeat-y; 
     transform: scaleX(-1); 
-    z-index: 90; 
-    pointer-events: none; /* Клики пальца пролетают сквозь гирлянду */
+    z-index: 99; 
+    pointer-events: none;
 }
 
 /* ==========================================================================
-   Шапка сайта (Header) и Меню
+   Шапка сайта (Bootstrap Navbar Customization)
    ========================================================================== */
-header {
-    background: transparent; 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center;
-    padding: 60px 140px 20px 140px; 
-    position: relative; 
-    z-index: 100;
+.navbar {
+    z-index: 1030; /* Делаем меню выше гирлянд роз */
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(5px);
 }
 
-header h1 a { 
-    font-family: 'Georgia', cursive, serif; 
-    font-size: 38px; 
-    color: rgba(233, 110, 145, 0.8); 
-    font-weight: 300; 
-    font-style: italic; 
-    text-decoration: none;
+.navbar-brand {
+    font-family: 'Georgia', cursive, serif;
+    color: #e96e91 !important;
 }
 
-nav {
-    display: flex;
-    align-items: center;
+.navbar-nav .nav-link {
+    color: #666666 !important;
+    font-size: 15px;
+    font-weight: 500;
+    margin-left: 10px;
+    transition: color 0.3s ease;
 }
 
-nav a { 
-    color: #b5b5b5; 
-    text-decoration: none; 
-    margin-left: 25px; 
-    font-size: 15px; 
-    font-weight: 500; 
-    transition: color 0.3s; 
+.navbar-nav .nav-link:hover {
+    color: #e96e91 !important;
 }
 
-nav a:hover { 
-    color: #e96e91; 
+/* Сброс глобального стиля кнопок для гамбургера Bootstrap */
+.navbar-toggler {
+    background: transparent !important;
+    border: 1px solid rgba(0,0,0,0.1) !important;
+    padding: 4px 8px !important;
+    box-shadow: none !important;
+    border-radius: 6px !important;
 }
 
-/* Кнопка гамбургера */
-.burger-menu {
-    display: none; 
-    flex-direction: column;
-    justify-content: space-between;
-    width: 32px;
-    height: 22px;
-    cursor: pointer;
-    z-index: 10000; /* ВЫШЕ ВСЕХ ГИРЛЯНД И ЭЛЕМЕНТОВ */
-    position: relative;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    padding: 2px;
-}
-
-.burger-menu span {
-    display: block;
-    width: 100%;
-    height: 3px;
-    background-color: #333;
-    border-radius: 3px;
-    transition: all 0.3s ease-in-out;
-}
-
-/* Превращение в крестик при активном меню */
-.burger-menu.active span:nth-child(1) {
-    transform: translateY(7.5px) rotate(45deg);
-}
-
-.burger-menu.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.burger-menu.active span:nth-child(3) {
-    transform: translateY(-7.5px) rotate(-45deg);
+.navbar-toggler:hover {
+    transform: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
 }
 
 /* ==========================================================================
@@ -180,10 +144,22 @@ button,
     outline: none;
 }
 
-button:hover {
+button:hover,
+.hero button:hover, 
+.calc-section button:hover, 
+#cart button:hover,
+#cart button.pay:hover, 
+.auth-content button:hover, 
+.product-box button:hover,
+.admin-lock-btn:hover {
     background: #ff003a; 
     transform: translateY(-2px); 
     box-shadow: 0 6px 18px rgba(255,0,58,0.4);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(244, 91, 126, 0.3);
 }
 
 .cake button { 
@@ -199,6 +175,39 @@ button:hover {
     background: #f45b7e; 
     color: white; 
     box-shadow: 0 4px 10px rgba(244, 91, 126, 0.2); 
+}
+
+#cartItems button {
+    padding: 5px 12px;
+    font-size: 12px;
+    border-radius: 12px;
+    margin: 0 2px;
+    box-shadow: none;
+}
+
+#cartItems button:last-child {
+    background: #6c757d;
+    box-shadow: none;
+}
+
+#cartItems button:last-child:hover {
+    background: #5a6268;
+}
+
+.close-modal {
+    background: transparent !important;
+    color: #aaa !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+}
+
+.close-modal:hover {
+    color: #333 !important;
+    background: transparent !important;
+    transform: none !important;
+    box-shadow: none !important;
 }
 
 /* ==========================================================================
@@ -251,6 +260,11 @@ input, select, textarea {
     transition: all 0.3s;
 }
 
+input:focus, select:focus, textarea:focus {
+    border-color: #f45b7e; 
+    box-shadow: 0 0 8px rgba(244, 91, 126, 0.15);
+}
+
 /* ==========================================================================
    Каталог тортов
    ========================================================================== */
@@ -297,18 +311,130 @@ input, select, textarea {
     margin-bottom: 15px; 
 }
 
+.cake.fade-in { 
+    opacity: 0; 
+    transform: translateY(40px); 
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out; 
+}
+
+.cake.fade-in.visible { 
+    opacity: 1; 
+    transform: translateY(0); 
+}
+
 /* ==========================================================================
-   Калькулятор и Корзина
+   Страница одного товара
    ========================================================================== */
-.calc-section, #cart { 
-    background: #fff; 
+.product-box { 
+    text-align: center; 
+    background: white; 
+    border-radius: 15px; 
+    padding: 30px; 
+}
+
+.product-image {
+    width: 100%; 
+    max-width: 420px; 
+    height: auto; 
+    max-height: 420px;
+    object-fit: cover; 
+    border-radius: 12px; 
+    margin: 0 auto 20px auto;
+    display: block; 
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.product-box h2 { 
+    font-family: 'Georgia', serif; 
+    font-size: 32px; 
+    color: #333; 
+    margin-bottom: 10px; 
+}
+
+/* ==========================================================================
+   Калькулятор стоимости своего торта
+   ========================================================================== */
+.calc-section { 
+    background: #fff9fa; 
     padding: 30px; 
     border-radius: 15px; 
     margin: 40px auto; 
-    max-width: 600px; 
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05); 
+    max-width: 550px; 
+    border: 1px solid #ffe3e8; 
+    box-shadow: 0 4px 20px rgba(244, 91, 126, 0.05); 
 }
 
+.calc-section h2 { 
+    font-family: 'Georgia', serif; 
+    color: #c23b61; 
+    margin-bottom: 20px; 
+    text-align: center; 
+}
+
+.calc-group { 
+    margin-bottom: 15px; 
+    text-align: left; 
+}
+
+.calc-group label { 
+    display: block; 
+    font-weight: 600; 
+    margin-bottom: 5px; 
+    color: #555; 
+}
+
+.calc-result { 
+    font-size: 20px; 
+    font-weight: 700; 
+    color: #c23b61; 
+    text-align: center; 
+    margin: 20px 0; 
+}
+
+/* ==========================================================================
+   Корзина покупок
+   ========================================================================== */
+#cart { 
+    max-width: 750px; 
+    margin: 40px auto; 
+    padding: 30px; 
+    background: #fff; 
+    border-radius: 15px; 
+    box-shadow: 0 5px 25px rgba(0,0,0,0.05); 
+}
+
+#cart h2 { 
+    font-family: 'Georgia', serif; 
+    color: #333; 
+    margin-bottom: 20px; 
+}
+
+#cart h3 { 
+    margin: 20px 0; 
+    color: #333; 
+}
+
+.cart-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.promo-box { 
+    display: flex; 
+    gap: 10px; 
+    margin-bottom: 20px; 
+}
+
+.promo-box input { 
+    margin-bottom: 0; 
+}
+
+/* ==========================================================================
+   Подвал сайта (Footer)
+   ========================================================================== */
 footer { 
     text-align: center; 
     padding: 40px 20px; 
@@ -317,59 +443,218 @@ footer {
     border-top: 1px solid #ffe3e8; 
 }
 
+footer p { 
+    margin-bottom: 10px; 
+    font-size: 15px; 
+    color: #666; 
+}
+
+.admin-lock-btn { 
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    margin-top: 15px;
+    color: #000;
+}
+
+.admin-lock-btn:hover { 
+    background: #fff;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    margin-top: 15px;
+    color: #000;
+}
+
+.pay-window {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 9999;
+}
+
+.pay-card {
+    background: white;
+    width: 350px;
+    padding: 30px;
+    border-radius: 25px;
+    margin: 150px auto;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+.card-number {
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+}
+
 /* ==========================================================================
-   АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ (До 768px)
+   Страница «О нас»
    ========================================================================== */
-@media (max-width: 768px) {
-    header {
-        padding: 30px 20px 15px 20px;
-    }
+.about-page {
+    background: #fffafc;
+    color: #4a4a4a;
+    padding: 40px 20px;
+}
 
-    header h1 a {
-        font-size: 24px;
-    }
+.about-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 50px;
+    border-radius: 25px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.08);
+    border: 1px solid #f4d7df;
+}
 
-    /* Показываем бургер */
-    .burger-menu {
-        display: flex !important;
-    }
+.about-container h1 {
+    text-align: center;
+    color: #c23b61;
+    font-size: 40px;
+    margin-bottom: 30px;
+    font-family: Georgia, serif;
+}
 
-    /* Выезжающее меню */
-    header nav {
-        position: fixed !important;
-        top: 0 !important;
-        right: -100% !important; /* Изначально за экраном */
-        width: 75% !important;
-        max-width: 300px !important;
-        height: 100vh !important;
-        background: #ffffff !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-        align-items: center !important;
-        box-shadow: -5px 0 25px rgba(0,0,0,0.2) !important;
-        transition: right 0.3s ease-in-out !important;
-        z-index: 9999 !important;
-    }
+.about-container p {
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #666;
+}
 
-    /* Меню в открытом состоянии */
-    header nav.active {
-        right: 0 !important;
-    }
+.about-container strong a {
+    color: #e96e91;
+    text-decoration: none;
+}
 
-    header nav a {
-        margin: 18px 0 !important;
-        font-size: 18px !important;
-        color: #333 !important;
-    }
+.features {
+    margin: 35px 0;
+    padding: 25px;
+    background: #fff6f8;
+    border-radius: 18px;
+}
 
-    /* Адаптируем гирлянды на маленьких экранах, чтобы не заслоняли текст */
+.features p {
+    margin: 12px 0;
+    font-size: 18px;
+}
+
+.footer-text {
+    font-style: italic;
+    text-align: center;
+    color: #777;
+}
+
+.home-btn {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 14px 35px;
+    background: #ff003a;
+    color: white;
+    text-decoration: none;
+    border-radius: 40px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.home-btn:hover {
+    background: #d90032;
+}
+
+/* ==========================================================================
+   АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ И ПЛАНШЕТОВ
+   ========================================================================== */
+@media (max-width: 992px) {
     body::after, .flowers-frame-right {
-        width: 40px;
-        opacity: 0.5;
+        width: 80px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Рамки на телефонах */
+    body::after, .flowers-frame-right {
+        width: 35px;
+        opacity: 0.4;
     }
 
-    #cakes { padding: 20px 15px; gap: 20px; }
-    .search-box { padding: 10px 20px; }
-    .hero h2 { font-size: 28px; }
-    #cart, .calc-section { margin: 20px 15px; padding: 20px; }
+    /* Мобильное выпадающее меню Bootstrap */
+    .navbar-collapse {
+        margin-top: 15px;
+        padding: 15px;
+        border-top: 1px solid #ffe3e8;
+        background: #ffffff;
+        border-radius: 0 0 12px 12px;
+    }
+
+    .navbar-nav .nav-link {
+        margin-left: 0;
+        padding: 10px 0;
+        border-bottom: 1px dashed #f5f5f5;
+    }
+
+    /* Каталог и блоки */
+    #cakes {
+        padding: 20px 15px;
+        gap: 20px;
+    }
+
+    .search-box {
+        padding: 10px 20px;
+    }
+
+    .hero h2 {
+        font-size: 28px;
+    }
+
+    #cart, .calc-section {
+        margin: 20px 15px;
+        padding: 20px;
+    }
+
+    .pay-card {
+        width: 90%;
+        margin: 100px auto;
+        padding: 20px;
+    }
+
+    .card-number {
+        font-size: 18px;
+        letter-spacing: 1px;
+    }
+
+    .about-page {
+        padding: 20px 10px;
+    }
+
+    .about-container {
+        padding: 25px 20px;
+        border-radius: 18px;
+    }
+
+    .about-container h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+
+    .about-container p, .features p {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .features {
+        padding: 15px;
+        margin: 20px 0;
+    }
+
+    .home-btn {
+        display: block;
+        text-align: center;
+        width: 100%;
+    }
 }
