@@ -55,7 +55,7 @@ body::after {
 }
 
 /* ==========================================================================
-   Шапка сайта (Header) и Адаптивное меню
+   Шапка сайта (Header) и Меню
    ========================================================================== */
 header {
     background: transparent; 
@@ -67,13 +67,13 @@ header {
     z-index: 1002;
 }
 
-header h1 a{ 
+header h1 a { 
     font-family: 'Georgia', cursive, serif; 
     font-size: 38px; 
     color: rgba(233, 110, 145, 0.8); 
     font-weight: 300; 
     font-style: italic; 
-	text-decoration: none;
+    text-decoration: none;
 }
 
 nav {
@@ -94,28 +94,43 @@ nav a:hover {
     color: #e96e91; 
 }
 
-/* Кнопка-бургер (по умолчанию скрыта на ПК) */
+/* Кнопка гамбургера */
 .burger-menu {
-    display: none;
+    display: none; /* Скрыто на десктопе */
     flex-direction: column;
     justify-content: space-between;
     width: 30px;
-    height: 22px;
+    height: 21px;
     cursor: pointer;
-    z-index: 1003;
+    z-index: 1005;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .burger-menu span {
     display: block;
-    height: 3px;
     width: 100%;
-    background-color: #f45b7e;
+    height: 3px;
+    background-color: #333;
     border-radius: 3px;
     transition: all 0.3s ease-in-out;
 }
 
+/* Анимация превращения в крестик */
+.burger-menu.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.burger-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.burger-menu.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
 /* ==========================================================================
-   Главный экран (Hero) и Блоки
+   Главный экран (Hero)
    ========================================================================== */
 .hero { 
     text-align: center; 
@@ -139,7 +154,7 @@ nav a:hover {
 }
 
 /* ==========================================================================
-   УНИВЕРСАЛЬНЫЙ КРАСИВЫЙ СТИЛЬ ДЛЯ ВСЕХ КНОПОК САЙТА
+   Кнопки сайта
    ========================================================================== */
 button, 
 .hero button, 
@@ -163,7 +178,6 @@ button,
     outline: none;
 }
 
-/* Эффект при наведении на любые кнопки */
 button:hover,
 .hero button:hover, 
 .calc-section button:hover, 
@@ -177,13 +191,11 @@ button:hover,
     box-shadow: 0 6px 18px rgba(255,0,58,0.4);
 }
 
-/* Активное состояние кнопки при клике */
 button:active {
     transform: translateY(0);
     box-shadow: 0 2px 8px rgba(244, 91, 126, 0.3);
 }
 
-/* Особый стиль для кнопок «Добавить в корзину» внутри карточек тортов */
 .cake button { 
     background: #ffffff; 
     color: #f45b7e; 
@@ -199,7 +211,6 @@ button:active {
     box-shadow: 0 4px 10px rgba(244, 91, 126, 0.2); 
 }
 
-/* Маленькие кнопки изменения количества в корзине (➕ и ➖) */
 #cartItems button {
     padding: 5px 12px;
     font-size: 12px;
@@ -208,7 +219,6 @@ button:active {
     box-shadow: none;
 }
 
-/* Кнопка «Удалить» в корзине */
 #cartItems button:last-child {
     background: #6c757d;
     box-shadow: none;
@@ -218,7 +228,6 @@ button:active {
     background: #5a6268;
 }
 
-/* Кнопка закрытия модального окна (крестик) — сброс стилей кнопки */
 .close-modal {
     background: transparent !important;
     color: #aaa !important;
@@ -273,7 +282,6 @@ button:active {
     font-weight: bold; 
 }
 
-/* Формы ввода в корзине и калькуляторе */
 input, select, textarea {
     width: 100%; 
     padding: 12px 20px; 
@@ -349,7 +357,7 @@ input:focus, select:focus, textarea:focus {
 }
 
 /* ==========================================================================
-   СТРАНИЦА ОДНОГО ТОВАРА
+   Страница одного товара
    ========================================================================== */
 .product-box { 
     text-align: center; 
@@ -521,115 +529,14 @@ footer p {
 }
 
 /* ==========================================================================
-   АДАПТИВНОСТЬ (Адаптация под мобильные устройства и планшеты)
+   Страница «О нас»
    ========================================================================== */
-@media (max-width: 992px) {
-    header {
-        padding: 50px 40px 20px 40px;
-    }
-    
-    body::after, .flowers-frame-right {
-        width: 80px; /* Уменьшаем боковые рамки на планшетах */
-    }
-}
-
-@media (max-width: 768px) {
-    /* Шапка и Бургер */
-    header {
-        padding: 40px 20px 15px 20px;
-    }
-
-    header h1 a {
-        font-size: 28px;
-    }
-
-    .burger-menu {
-        display: flex; /* Показываем бургер */
-    }
-
-    nav {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: #ffffff;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px 0;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        display: none; /* Скрываем навигацию по умолчанию */
-        border-bottom: 2px solid #ffe3e8;
-    }
-
-    nav.active {
-        display: flex; /* Показываем при вызове скриптом */
-    }
-
-    nav a {
-        margin: 12px 0;
-        font-size: 16px;
-    }
-
-    /* Анимация бургера в крестик */
-    .burger-menu.active span:nth-child(1) {
-        transform: translateY(9.5px) rotate(45deg);
-    }
-    .burger-menu.active span:nth-child(2) {
-        opacity: 0;
-    }
-    .burger-menu.active span:nth-child(3) {
-        transform: translateY(-9.5px) rotate(-45deg);
-    }
-
-    /* Цветы на мобильных — уменьшаем боковые, чтобы не перекрывали контент */
-    body::after, .flowers-frame-right {
-        width: 40px;
-        opacity: 0.5;
-    }
-
-    /* Каталог и поиск */
-    #cakes {
-        padding: 20px 15px;
-        gap: 20px;
-    }
-
-    .search-box {
-        padding: 10px 20px;
-    }
-
-    .hero h2 {
-        font-size: 30px;
-    }
-
-    /* Корзина и модальные окна */
-    #cart, .calc-section {
-        margin: 20px 15px;
-        padding: 20px;
-    }
-
-    .pay-card {
-        width: 90%;
-        margin: 100px auto;
-        padding: 20px;
-    }
-
-    .card-number {
-        font-size: 18px;
-        letter-spacing: 1px;
-    }
-}
-/* ==========================================================================
-   Страница «О нас» (Объединенные стили из about.css)
-   ========================================================================== */
-
-/* Обертка страницы «О нас» вместо глобального body */
 .about-page {
     background: #fffafc;
     color: #4a4a4a;
     padding: 40px 20px;
 }
 
-/* Основной блок */
 .about-container {
     max-width: 900px;
     margin: 0 auto;
@@ -655,12 +562,11 @@ footer p {
     color: #666;
 }
 
-
-.about-container strong a{
+.about-container strong a {
     color: #e96e91;
-	text-decoration: none;
+    text-decoration: none;
 }
-/* Преимущества */
+
 .features {
     margin: 35px 0;
     padding: 25px;
@@ -673,14 +579,12 @@ footer p {
     font-size: 18px;
 }
 
-/* Последний текст */
 .footer-text {
     font-style: italic;
     text-align: center;
     color: #777;
 }
 
-/* Кнопка */
 .home-btn {
     display: inline-block;
     margin-top: 30px;
@@ -697,8 +601,93 @@ footer p {
     background: #d90032;
 }
 
-/* Адаптивность для мобильных устройств */
+/* ==========================================================================
+   ЕДИНАЯ АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ И ПЛАНШЕТОВ
+   ========================================================================== */
+@media (max-width: 992px) {
+    header {
+        padding: 50px 40px 20px 40px;
+    }
+    
+    body::after, .flowers-frame-right {
+        width: 80px;
+    }
+}
+
 @media (max-width: 768px) {
+    /* Шапка и Мобильное меню */
+    header {
+        padding: 30px 20px 15px 20px;
+    }
+
+    header h1 a {
+        font-size: 26px;
+    }
+
+    .burger-menu {
+        display: flex; /* Показываем бургер */
+    }
+
+    nav {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Изначально скрыто справа */
+        width: 75%;
+        height: 100vh;
+        background: #ffffff;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-shadow: -5px 0 20px rgba(0,0,0,0.15);
+        transition: right 0.3s ease-in-out;
+        z-index: 1000;
+    }
+
+    nav.active {
+        right: 0; /* Выезжает при нажатии */
+    }
+
+    nav a {
+        margin: 15px 0;
+        font-size: 18px;
+    }
+
+    /* Рамки на телефонах */
+    body::after, .flowers-frame-right {
+        width: 35px;
+        opacity: 0.4;
+    }
+
+    /* Каталог и блоки */
+    #cakes {
+        padding: 20px 15px;
+        gap: 20px;
+    }
+
+    .search-box {
+        padding: 10px 20px;
+    }
+
+    .hero h2 {
+        font-size: 28px;
+    }
+
+    #cart, .calc-section {
+        margin: 20px 15px;
+        padding: 20px;
+    }
+
+    .pay-card {
+        width: 90%;
+        margin: 100px auto;
+        padding: 20px;
+    }
+
+    .card-number {
+        font-size: 18px;
+        letter-spacing: 1px;
+    }
+
     .about-page {
         padding: 20px 10px;
     }
@@ -713,8 +702,7 @@ footer p {
         margin-bottom: 20px;
     }
 
-    .about-container p,
-    .features p {
+    .about-container p, .features p {
         font-size: 16px;
         line-height: 1.6;
     }
