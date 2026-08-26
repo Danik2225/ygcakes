@@ -16,6 +16,61 @@
     <!-- Ваши стили -->
     <link rel="stylesheet" href="style.css">
 
+    <!-- Дополнительные мобильные адаптивные стили -->
+    <style>
+        /* Адаптация для мобильных устройств */
+        @media (max-width: 768px) {
+            body {
+                overflow-x: hidden;
+            }
+            .container {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            /* Сетка каталога на смартфонах */
+            #cakes {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+                padding: 10px;
+            }
+            .cake {
+                width: 100% !important;
+                margin: 0 !important;
+                box-sizing: border-box;
+            }
+            .cake img {
+                width: 100%;
+                height: 160px;
+                object-fit: cover;
+                border-radius: 8px;
+            }
+            /* Инпуты и формы на всю ширину */
+            .search-box input, 
+            #cart input, 
+            #cart select, 
+            .calc-group select, 
+            .calc-group input {
+                width: 100% !important;
+                max-width: 100%;
+                box-sizing: border-box;
+                margin-bottom: 10px;
+            }
+            /* Кнопки удобно нажимать пальцем */
+            button {
+                width: 100%;
+                padding: 12px;
+                font-size: 16px;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero h2 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+
     <!-- Ваши скрипты -->
     <script src="script.js" defer></script>
 </head>
@@ -63,32 +118,33 @@
 <!-- Отступ под фиксированную шапку -->
 <div style="margin-top: 80px;"></div>
 
-<div class="search-box">
+<div class="search-box text-center my-3 container">
     <input 
         type="text" 
         id="search" 
+        class="form-control"
         placeholder="🔍 Поиск торта..." 
         onkeyup="searchCakes()">
 </div>
 
-<p id="notFound">
+<p id="notFound" class="text-center text-muted" style="display:none;">
 Ничего не найдено
 </p>
 
-<section class="hero" id="home">
+<section class="hero text-center py-4" id="home">
     <h1>
         <i style="color:red;">YG Cakes</i>
     </h1>
-    <br><br>
+    <br>
     <h2>Вкусные торты на любой случай</h2>
     <p>Испечено с любовью — специально для вас!</p>
-    <button onclick="document.getElementById('cakes').scrollIntoView({behavior:'smooth'})">
+    <button class="btn btn-danger btn-lg mt-2" onclick="document.getElementById('cakes').scrollIntoView({behavior:'smooth'})">
         КАТАЛОГ
     </button>
 </section>
 
 <!-- КАТАЛОГ ТОРТОВ -->
-<section id="catalog">
+<section id="catalog" class="container my-4">
     <div id="cakes">
 
         <div class="cake fade-in">
@@ -217,12 +273,12 @@
 </section>
 
 <!-- КАЛЬКУЛЯТОР -->
-<section id="calculator-cake" class="calc-section">
+<section id="calculator-cake" class="calc-section container my-5">
     <h2>Сделайте свой торт</h2>
 
-    <div class="calc-group">
+    <div class="calc-group my-2">
         <label>Тип/Начинка:</label>
-        <select id="cakeType" onchange="calculateCakePrice()">
+        <select id="cakeType" class="form-select" onchange="calculateCakePrice()">
             <option value="6000">Классический бисквит (6000 ֏/кг)</option>
             <option value="7000">Шоколадный / Прага (7000 ֏/кг)</option>
             <option value="8000">Ягодный / Малина (8000 ֏/кг)</option>
@@ -230,63 +286,66 @@
         </select>
     </div>
 
-    <div class="calc-group">
+    <div class="calc-group my-2">
         <label>Вес торта (в кг):</label>
         <input 
             type="number" 
             id="cakeWeight" 
+            class="form-control"
             value="2" 
             min="1" 
             max="15"
             oninput="calculateCakePrice()">
     </div>
 
-    <div class="calc-group">
+    <div class="calc-group my-2">
         <label>Количество ярусов:</label>
-        <select id="cakeTiers" onchange="calculateCakePrice()">
+        <select id="cakeTiers" class="form-select" onchange="calculateCakePrice()">
             <option value="0">1 ярус (+0 ֏)</option>
             <option value="3000">2 яруса (+3000 ֏)</option>
             <option value="6000">3 яруса (+6000 ֏)</option>
         </select>
     </div>
 
-    <div class="calc-group">
+    <div class="calc-group my-2">
         <label>Сложность декора:</label>
-        <select id="cakeDecor" onchange="calculateCakePrice()">
+        <select id="cakeDecor" class="form-select" onchange="calculateCakePrice()">
             <option value="0">Простой (+0 ֏)</option>
             <option value="2000">Мастика / фигурки (+2000 ֏)</option>
             <option value="4000">Сложный декор (+4000 ֏)</option>
         </select>
     </div>
 
-    <div class="calc-result">
+    <div class="calc-result my-3 fw-bold fs-5">
         Примерная стоимость: <span id="calcPrice">12000</span> ֏
     </div>
 
-    <button type="button" onclick="addCustomCakeToCart()">🛍️ Добавить этот расчет в корзину</button>
+    <button type="button" class="btn btn-outline-danger" onclick="addCustomCakeToCart()">🛍️ Добавить этот расчет в корзину</button>
 </section>
 
 <!-- КОРЗИНА -->
-<section id="cart">
+<section id="cart" class="container my-5">
     <h2>🛒 Корзина</h2>
 
     <div id="cartItems"></div>
 
-    <h3>Итого: <span id="total">0</span> ֏</h3>
+    <h3 class="my-3">Итого: <span id="total">0</span> ֏</h3>
 
-    <div class="promo-box">
-        <input id="promo" placeholder="Промокод">
-        <button onclick="promo()">Применить</button>a
+    <div class="promo-box mb-3">
+        <input id="promo" class="form-control d-inline-block w-auto" placeholder="Промокод">
+        <button class="btn btn-secondary" onclick="promo()">Применить</button>
     </div>
 
-    <input id="name" placeholder="Ваше имя">
-    <input id="phone" placeholder="Телефон">
-    <input id="address" placeholder="Адрес доставки">
-    <input id="deliveryDate" type="date">
+    <div class="d-flex flex-column gap-2 max-w-sm mb-3">
+        <input id="name" class="form-control" placeholder="Ваше имя">
+        <input id="phone" class="form-control" placeholder="Телефон">
+        <input id="address" class="form-control" placeholder="Адрес доставки">
+        <input id="deliveryDate" class="form-control" type="date">
+    </div>
 
     <h3>Способ оплаты</h3>
 
-    <select id="payment" onchange="togglePaymentMessage()">
+    <select id="payment" class="form-select mb-3" onchange="togglePaymentMessage()">
         <option value="cash">💵 Оплата при получении</option>
         <option value="card">💳 Оплата картой</option>
     </select>
@@ -298,25 +357,25 @@
         <div class="pay-card">
             <h2>💳 Оплата заказа</h2>
             <p>Переведите сумму на карту:</p>
-            <div class="card-number">5501 0400 1015 5884</div>
+            <div class="card-number fw-bold fs-4 text-primary my-2">5501 0400 1015 5884</div>
             <p>После оплаты нажмите закрыть</p>
-            <button onclick="closePay()">Закрыть</button>
+            <button class="btn btn-dark" onclick="closePay()">Закрыть</button>
         </div>
     </div>
 
-    <br>
-    <button class="pay" onclick="checkout()">✅ Оформить заказ</button>
+    <button class="pay btn btn-success btn-lg w-100 mt-3" onclick="checkout()">✅ Оформить заказ</button>
 </section>
 
-<footer id="contact">
+<footer id="contact" class="bg-light text-center py-4 mt-5">
     <h2>Контакты</h2>
-    <p>📞 098 434363 | Instagram: @yana_gulyan | TikTok: @yg_cakes | facebook Yana Gulyan | Email: yanagulyanyg@gmail.com |</p>
+    <p class="px-3">📞 098 434363 | Instagram: @yana_gulyan | TikTok: @yg_cakes | facebook Yana Gulyan | Email: yanagulyanyg@gmail.com</p>
     <div class="flowers-frame-right"></div>
 </footer>
 
 <!-- Bootstrap 5 JS Bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
+<!-- Скрипт чат-виджета Domino CRM -->
 <script src="https://chat.domino-crm.com/chat-widget.js"></script>
 <script type="text/javascript">
   window.dominoChatWidget.init(
